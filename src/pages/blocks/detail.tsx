@@ -8,7 +8,7 @@ import { Search } from '@components/search';
 const BlocksDetails = () => {
   return (
     <Section>
-      <div className="flex flex-row justify-between items-center mb-5">
+      <div className="flex flex-row justify-between items-center mb-10">
         <h1 className="text-3xl font-bold">Block details</h1>
         <Search />
       </div>

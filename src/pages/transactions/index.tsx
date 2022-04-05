@@ -11,7 +11,7 @@ import { TransactionDataDummy as Data } from '@data/index';
 const Transactions = () => {
   return (
     <Section>
-      <div className="flex flex-row justify-between items-center mb-5">
+      <div className="flex flex-row justify-between items-center mb-10">
         <h1 className="text-3xl font-bold">Transactions</h1>
         <Search />
       </div>
