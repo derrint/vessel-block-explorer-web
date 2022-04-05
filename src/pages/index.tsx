@@ -31,35 +31,35 @@ const Home = () => {
       timestamp: '4 secs ago',
       value: '40 txns',
       icon: <FiLayers size={20} />,
-      hash: '0xa15c13e183bfc',
+      hash: '0xa15c13e183bfcefgj898as7sas24',
     },
     {
       id: 14337225,
       timestamp: '4 secs ago',
       value: '40 txns',
       icon: <FiLayers size={20} />,
-      hash: '0xa15c13e183bfc',
+      hash: '0xa15c13e183bfcefgj898as7sas24',
     },
     {
       id: 14337225,
       timestamp: '4 secs ago',
       value: '40 txns',
       icon: <FiLayers size={20} />,
-      hash: '0xa15c13e183bfc',
+      hash: '0xa15c13e183bfcefgj898as7sas24',
     },
     {
       id: 14337225,
       timestamp: '4 secs ago',
       value: '40 txns',
       icon: <BiCube size={20} />,
-      hash: '0xa15c13e183bfc',
+      hash: '0xa15c13e183bfcefgj898as7sas24',
     },
     {
       id: 14337225,
       timestamp: '4 secs ago',
       value: '40 txns',
       icon: <BiCube size={20} />,
-      hash: '0xa15c13e183bfc',
+      hash: '0xa15c13e183bfcefgj898as7sas24',
     },
   ];
 
@@ -67,40 +67,40 @@ const Home = () => {
     {
       id: '0xa15c13e183bfcefgj898as7sas24',
       timestamp: '4 secs ago',
-      from: '0xa15c13e183bfc...',
-      to: '0xa15c13e183bfc...',
-      value: '0.4283 VSL',
-      icon: <AiOutlineSync size={20} />,
-    },
-    {
-      id: '0xa15c13e183bfc...',
-      timestamp: '4 secs ago',
-      from: '0xa15c13e183bfc...',
-      to: '0xa15c13e183bfc...',
-      value: '0.4283 VSL',
-      icon: <AiOutlineSync size={20} />,
-    },
-    {
-      id: '0xa15c13e183bfc...',
-      timestamp: '4 secs ago',
-      from: '0xa15c13e183bfc...',
-      to: '0xa15c13e183bfc...',
+      from: '0xa15c13e183bfcefgj898as7sas24',
+      to: '0xa15c13e183bfcefgj898as7sas24',
       value: '0.4283 VSL',
       icon: <AiOutlineSync size={20} />,
     },
     {
       id: '0xa15c13e183bfcefgj898as7sas24',
       timestamp: '4 secs ago',
-      from: '0xa15c13e183bfc...',
-      to: '0xa15c13e183bfc...',
+      from: '0xa15c13e183bfcefgj898as7sas24',
+      to: '0xa15c13e183bfcefgj898as7sas24',
       value: '0.4283 VSL',
       icon: <AiOutlineSync size={20} />,
     },
     {
       id: '0xa15c13e183bfcefgj898as7sas24',
       timestamp: '4 secs ago',
-      from: '0xa15c13e183bfc...',
-      to: '0xa15c13e183bfc...',
+      from: '0xa15c13e183bfcefgj898as7sas24',
+      to: '0xa15c13e183bfcefgj898as7sas24',
+      value: '0.4283 VSL',
+      icon: <AiOutlineSync size={20} />,
+    },
+    {
+      id: '0xa15c13e183bfcefgj898as7sas24',
+      timestamp: '4 secs ago',
+      from: '0xa15c13e183bfcefgj898as7sas24',
+      to: '0xa15c13e183bfcefgj898as7sas24',
+      value: '0.4283 VSL',
+      icon: <AiOutlineSync size={20} />,
+    },
+    {
+      id: '0xa15c13e183bfcefgj898as7sas24',
+      timestamp: '4 secs ago',
+      from: '0xa15c13e183bfcefgj898as7sas24',
+      to: '0xa15c13e183bfcefgj898as7sas24',
       value: '0.4283 VSL',
       icon: <AiOutlineSync size={20} />,
     },
@@ -152,18 +152,22 @@ const Home = () => {
                       {item.icon}
                     </div>
                     <div>
-                      <div className="text-base font-bold text-primary">
-                        {item.id}
-                      </div>
+                      <Link href={`/block/${item.id}`} passHref>
+                        <a className="text-base font-bold text-primary truncate w-28 block">
+                          {item.id}
+                        </a>
+                      </Link>
                       <div className="text-xs font-medium text-gray-text">
                         {item.timestamp}
                       </div>
                     </div>
                   </div>
                   <div className="text-sm font-bold">{item.value}</div>
-                  <div className="text-sm font-medium text-primary">
-                    {item.hash}
-                  </div>
+                  <Link href={`/address/${item.hash}`} passHref>
+                    <a className="text-sm font-medium text-primary truncate w-28 block">
+                      {item.hash}
+                    </a>
+                  </Link>
                 </div>
               );
             })}
@@ -189,9 +193,11 @@ const Home = () => {
                       {item.icon}
                     </div>
                     <div>
-                      <div className="text-base font-bold text-primary truncate w-28">
-                        {item.id}
-                      </div>
+                      <Link href={`/tx/${item.id}`} passHref>
+                        <a className="text-base font-bold text-primary truncate w-28 block">
+                          {item.id}
+                        </a>
+                      </Link>
                       <div className="text-xs font-medium text-gray-text">
                         {item.timestamp}
                       </div>
@@ -199,10 +205,16 @@ const Home = () => {
                   </div>
                   <div className="w-5/12">
                     <div className="text-sm font-medium truncate w-40">
-                      From <span className="text-primary">{item.from}</span>
+                      From{' '}
+                      <Link href={`/address/${item.from}`} passHref>
+                        <a className="text-primary">{item.from}</a>
+                      </Link>
                     </div>
                     <div className="text-sm font-medium truncate w-40">
-                      To <span className="text-primary">{item.to}</span>
+                      To{' '}
+                      <Link href={`/address/${item.to}`} passHref>
+                        <a className="text-primary">{item.to}</a>
+                      </Link>
                     </div>
                   </div>
                   <div className="text-right text-xs font-medium w-2/12">
