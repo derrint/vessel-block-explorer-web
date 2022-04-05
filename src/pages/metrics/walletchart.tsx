@@ -91,9 +91,7 @@ const WalletChart = () => {
     <>
       <div className="flex flex-row justify-between items-center mb-5">
         <div>
-          <h3 className="text-2xl font-bold mt-2">
-            {intervalTitle} Transaction
-          </h3>
+          <h3 className="text-2xl font-bold mt-2">Wallets Created</h3>
           <h4 className="text-s">All Time</h4>
         </div>
         <div className="flex flex-row items-center">

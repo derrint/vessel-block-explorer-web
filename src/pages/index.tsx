@@ -14,7 +14,7 @@ const Home = () => {
       value: '25,410,510',
     },
     {
-      id: 'transactions',
+      id: 'txs',
       label: 'Total Transactions',
       value: '95,001,163',
     },

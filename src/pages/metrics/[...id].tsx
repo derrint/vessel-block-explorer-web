@@ -15,6 +15,7 @@ const Metrics = () => {
   const [selectedMetric, setSelectedMetric] = React.useState('' as any);
 
   React.useEffect(() => {
+    console.log(router.query.id);
     if (router.query.id) {
       const mt = router?.query?.id[0];
       setSelectedMetric(mt);
@@ -22,6 +23,7 @@ const Metrics = () => {
 
     return () => {};
   }, [router.query]);
+
   const metrics = [
     {
       id: 'blocks',
@@ -34,14 +36,14 @@ const Metrics = () => {
       route: '/blocks',
     },
     {
-      id: 'transactions',
+      id: 'txs',
       label: {
         primary: 'Transactions',
         total: 'Total Transactions',
       },
       value: '95,001,163',
       hasDetail: true,
-      route: '/transactions',
+      route: '/txs',
     },
     {
       id: 'wallets',
@@ -105,7 +107,7 @@ const Metrics = () => {
                     </Link>
                   </div>
                 </div>
-                {item.id === 'transactions' && (
+                {item.id === 'txs' && (
                   <div className="flex flex-col bg-white mt-5 px-6 py-5 rounded-2xl	shadow-md">
                     <TransactionChart />
                   </div>
