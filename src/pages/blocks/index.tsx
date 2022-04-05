@@ -11,7 +11,7 @@ import { BlocksDataDummy as Data } from '@data/index';
 const Blocks = () => {
   return (
     <Section>
-      <div className="flex flex-row justify-between items-center mb-5">
+      <div className="flex flex-row justify-between items-center mb-10">
         <h1 className="text-3xl font-bold">Blocks</h1>
         <Search />
       </div>
@@ -55,9 +55,11 @@ const Blocks = () => {
                   <td className="px-6 py-3">{moment(item.age).fromNow()}</td>
                   <td className="px-6 py-3">{item.txn}</td>
                   <td className="px-6 py-3">
-                    <div className="text-primary truncate w-28">
-                      {item.validator}
-                    </div>
+                    <Link href={`/address/${item.validator}`} passHref>
+                      <a className="text-primary truncate w-28 block">
+                        {item.validator}
+                      </a>
+                    </Link>
                   </td>
                   <td className="px-6 py-3">{item.gas_used}</td>
                 </tr>

@@ -62,12 +62,18 @@ const Transactions = () => {
                     {moment(item.time).format('YYYY-MM-DD HH:mm:ss')}
                   </td>
                   <td className="px-6 py-3">
-                    <div className="text-primary truncate w-28">
-                      {item.from}
-                    </div>
+                    <Link href={`/address/${item.from}`} passHref>
+                      <a className="text-primary truncate w-28 block">
+                        {item.from}
+                      </a>
+                    </Link>
                   </td>
                   <td className="px-6 py-3">
-                    <div className="text-primary truncate w-28">{item.to}</div>
+                    <Link href={`/address/${item.to}`} passHref>
+                      <a className="text-primary truncate w-28 block">
+                        {item.to}
+                      </a>
+                    </Link>
                   </td>
                   <td className="px-6 py-3">{item.value}</td>
                 </tr>
