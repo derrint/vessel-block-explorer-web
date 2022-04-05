@@ -50,14 +50,20 @@ const Transactions = () => {
             <tbody>
               {Data.Data.map((item, i) => (
                 <tr key={i} className="odd:bg-gray-50 even:bg-white border-b">
-                  <th scope="row" className="px-6 py-3">
+                  <td scope="row" className="px-6 py-3">
                     <div className="text-primary truncate w-28">
-                      <Link href="/transactions/detail" passHref>
+                      <Link href={`/tx/${item.transaction_hash}`} passHref>
                         <a className="text-primary">{item.transaction_hash}</a>
                       </Link>
                     </div>
-                  </th>
-                  <td className="px-6 py-3 text-primary">{item.block}</td>
+                  </td>
+                  <td className="px-6 py-3">
+                    <div className="text-primary truncate w-18">
+                      <Link href={`/block/${item.block}`} passHref>
+                        <a className="text-primary">{item.block}</a>
+                      </Link>
+                    </div>
+                  </td>
                   <td className="px-6 py-3">
                     {moment(item.time).format('YYYY-MM-DD HH:mm:ss')}
                   </td>

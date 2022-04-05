@@ -47,11 +47,11 @@ const Blocks = () => {
             <tbody>
               {Data.Data.map((item, i) => (
                 <tr key={i} className="odd:bg-gray-50 even:bg-white border-b">
-                  <th scope="row" className="px-6 py-3">
-                    <Link href="/blocks/detail" passHref>
+                  <td scope="row" className="px-6 py-3">
+                    <Link href={`/block/${item.block}`} passHref>
                       <a className="text-primary">{item.block}</a>
                     </Link>
-                  </th>
+                  </td>
                   <td className="px-6 py-3">{moment(item.age).fromNow()}</td>
                   <td className="px-6 py-3">{item.txn}</td>
                   <td className="px-6 py-3">
