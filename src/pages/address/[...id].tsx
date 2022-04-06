@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-import { Tab } from '@headlessui/react';
+import { Tab, Dialog, Transition } from '@headlessui/react';
 import { HiOutlineQrcode } from 'react-icons/hi';
 import { IoMdCopy } from 'react-icons/io';
+import QRCode from 'react-qr-code';
 
 import { Section } from '@components/layout';
 import { Search } from '@components/search';
@@ -33,6 +34,16 @@ const BlocksDetails = () => {
     },
   ];
 
+  const [isOpen, setIsOpen] = React.useState(true);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
   return (
     <Section>
       <div className="flex flex-row justify-between items-center mb-10">
@@ -61,9 +72,70 @@ const BlocksDetails = () => {
           className="cursor-pointer"
           color="#6151FF"
           onClick={() => {
-            copyToClipboard(address);
+            openModal();
           }}
         />
+
+        <Transition appear show={isOpen} as={Fragment}>
+          <Dialog
+            as="div"
+            className="fixed inset-0 z-10 overflow-y-auto"
+            onClose={closeModal}
+          >
+            <div className="min-h-screen px-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50" />
+              </Transition.Child>
+
+              {/* This element is to trick the browser into centering the modal contents. */}
+              <span
+                className="inline-block h-screen align-middle"
+                aria-hidden="true"
+              >
+                &#8203;
+              </span>
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-center align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-2xl font-bold leading-6 text-gray-900"
+                  >
+                    {address}
+                  </Dialog.Title>
+                  <div className="my-10 flex justify-center">
+                    <QRCode value={address} />
+                  </div>
+
+                  <div className="mt-4">
+                    <button
+                      type="button"
+                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200"
+                      onClick={closeModal}
+                    >
+                      Got it, thanks!
+                    </button>
+                  </div>
+                </div>
+              </Transition.Child>
+            </div>
+          </Dialog>
+        </Transition>
       </div>
 
       <div className="flex gap-6">
