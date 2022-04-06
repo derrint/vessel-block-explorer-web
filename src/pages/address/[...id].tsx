@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 
-import { Tab, Dialog, Transition } from '@headlessui/react';
+import { Tab, Dialog, Transition, Popover } from '@headlessui/react';
+import { FiChevronDown } from 'react-icons/fi';
 import { HiOutlineQrcode } from 'react-icons/hi';
 import { IoMdCopy } from 'react-icons/io';
 import QRCode from 'react-qr-code';
@@ -43,6 +44,23 @@ const BlocksDetails = () => {
   function openModal() {
     setIsOpen(true);
   }
+
+  const tokens = [
+    {
+      name: 'Matic Token',
+      icon: 'https://derrint.sirv.com/Images/vessel/block-explorer/icons/icon-matic.png',
+      amount: '24,880 MATIC',
+      price: '$33,177',
+      value: '$1.37',
+    },
+    {
+      name: 'USD Coin',
+      icon: 'https://derrint.sirv.com/Images/vessel/block-explorer/icons/icon-usdc.png',
+      amount: '66 USDC',
+      price: '$24,300',
+      value: '$1.40',
+    },
+  ];
 
   return (
     <Section>
@@ -149,7 +167,65 @@ const BlocksDetails = () => {
             <div className="text-gray-text font-bold mb-3">Created at</div>
             <div className="col-span-3 mb-3">22 February 2021, 16:03:08</div>
             <div className="text-gray-text font-bold mb-3">Assets</div>
-            <div className="col-span-3 mb-3">$5.87</div>
+            <div className="col-span-3 mb-3 flex items-center gap-3">
+              $5.87
+              <Popover className="relative">
+                {({ open }) => (
+                  <>
+                    <Popover.Button
+                      className={`
+                ${open ? '' : 'text-opacity-90'}
+                text-primary group bg-[#0034B914] px-3 py-2 rounded-md inline-flex items-center text-xs font-bold hover:text-opacity-100`}
+                    >
+                      <span>5 Tokens</span>
+                      <FiChevronDown
+                        className={`${open ? '' : 'text-opacity-70'}
+                  ml-2 h-4 w-4 text-primary group-hover:text-opacity-80 transition ease-in-out duration-150`}
+                        aria-hidden="true"
+                      />
+                    </Popover.Button>
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-200"
+                      enterFrom="opacity-0 translate-y-1"
+                      enterTo="opacity-100 translate-y-0"
+                      leave="transition ease-in duration-150"
+                      leaveFrom="opacity-100 translate-y-0"
+                      leaveTo="opacity-0 translate-y-1"
+                    >
+                      <Popover.Panel className="absolute z-10 w-screen max-w-sm px-4 mt-3 transform -translate-x-1/2 left-1/2 sm:px-0 lg:max-w-xl">
+                        <div className="overflow-hidden bg-white p-2 rounded-lg shadow-lg">
+                          <div className="px-4 py-3 grid grid-cols-4 gap-4 text-sm text-gray-text font-bold">
+                            <div></div>
+                            <div>Amount</div>
+                            <div>Price</div>
+                            <div>Value</div>
+                          </div>
+                          {tokens.map((item, idx) => (
+                            <div
+                              key={idx}
+                              className="px-4 py-3 grid grid-cols-4 gap-4 text-sm font-bold text-[#333333] items-center"
+                            >
+                              <div className="flex gap-2 items-center">
+                                <img
+                                  src={item.icon}
+                                  className="w-5 h-5"
+                                  alt=""
+                                />
+                                {item.name}
+                              </div>
+                              <div>{item.amount}</div>
+                              <div>{item.price}</div>
+                              <div>{item.value}</div>
+                            </div>
+                          ))}
+                        </div>
+                      </Popover.Panel>
+                    </Transition>
+                  </>
+                )}
+              </Popover>
+            </div>
           </div>
         </div>
         <div className="w-6/12 flex flex-col rounded-2xl shadow-md bg-white divide-y divide-gray-divider">
