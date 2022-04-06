@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Tab } from '@headlessui/react';
 import { HiOutlineQrcode } from 'react-icons/hi';
 import { IoMdCopy } from 'react-icons/io';
 
@@ -7,8 +8,31 @@ import { Section } from '@components/layout';
 import { Search } from '@components/search';
 import { copyToClipboard } from '@utils/helper';
 
+import ERCs from './erc';
+import Transactions from './txs';
+
 const BlocksDetails = () => {
   const address = '0x2281774720dab09c';
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  const tabs = [
+    {
+      id: 'txs',
+      label: 'Transactions',
+      content: <Transactions />,
+    },
+    {
+      id: 'erc-20',
+      label: 'ERC 20',
+      content: <ERCs />,
+    },
+    {
+      id: 'erc-1155',
+      label: 'ERC 1155',
+      content: <ERCs />,
+    },
+  ];
+
   return (
     <Section>
       <div className="flex flex-row justify-between items-center mb-10">
@@ -41,6 +65,7 @@ const BlocksDetails = () => {
           }}
         />
       </div>
+
       <div className="flex gap-6">
         <div className="w-6/12 flex flex-col rounded-2xl shadow-md bg-white divide-y divide-gray-divider">
           <div className="px-5 py-3">
@@ -64,6 +89,38 @@ const BlocksDetails = () => {
             <div className="col-span-3 my-3"></div>
           </div>
         </div>
+      </div>
+
+      <div className="mt-10">
+        <Tab.Group
+          selectedIndex={selectedIndex}
+          onChange={(idx: any) => {
+            setSelectedIndex(idx);
+          }}
+        >
+          <Tab.List className="flex max-w-min p-1 space-x-1 rounded-2xl bg-gray-background">
+            {tabs.map((item: any) => (
+              <Tab
+                key={item.id}
+                className={`py-4 px-6 whitespace-nowrap text-base leading-5 font-bold rounded-2xl
+                    ${
+                      tabs[selectedIndex]?.id === item.id
+                        ? ' text-primary bg-white shadow-md'
+                        : ' text-black '
+                    }`}
+              >
+                {item.label}
+              </Tab>
+            ))}
+          </Tab.List>
+          <Tab.Panels className="mt-6 bg-gradient-gray-end">
+            {tabs.map((item, idx) => (
+              <Tab.Panel key={idx} className="w-full">
+                {item.content}
+              </Tab.Panel>
+            ))}
+          </Tab.Panels>
+        </Tab.Group>
       </div>
     </Section>
   );
