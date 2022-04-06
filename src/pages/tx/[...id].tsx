@@ -6,6 +6,7 @@ import { IoCheckmarkCircle } from 'react-icons/io5';
 
 import { Section } from '@components/layout';
 import { Search } from '@components/search';
+import { copyToClipboard } from '@utils/helper';
 
 const TxDetails = () => {
   const blockNumber = '14337225';
@@ -57,7 +58,9 @@ const TxDetails = () => {
                 size={15}
                 className="cursor-pointer mx-2"
                 color="#6151FF"
-                onClick={() => console.log('copy')}
+                onClick={() => {
+                  copyToClipboard(address);
+                }}
               />
             </p>
           </div>
@@ -71,7 +74,9 @@ const TxDetails = () => {
                 size={15}
                 className="cursor-pointer mx-2"
                 color="#6151FF"
-                onClick={() => console.log('copy')}
+                onClick={() => {
+                  copyToClipboard(address);
+                }}
               />
             </p>
           </div>
