@@ -12,13 +12,13 @@ const Transactions = () => {
       <table className="w-full text-sm text-left">
         <thead className="text-xs text-gray-700 bg-white">
           <tr>
-            <th scope="col" className="px-6 py-4">
+            <th scope="col" className="px-6 py-4 whitespace-nowrap">
               Txn Hash
             </th>
             <th scope="col" className="px-6 py-4">
               Block
             </th>
-            <th scope="col" className="px-6 py-4">
+            <th scope="col" className="px-6 py-4 whitespace-nowrap">
               <span className="flex items-center">
                 Time (UTC){' '}
                 <MdOutlineAccessTimeFilled
@@ -34,7 +34,7 @@ const Transactions = () => {
             <th scope="col" className="px-6 py-4">
               To
             </th>
-            <th scope="col" className="px-6 py-4">
+            <th scope="col" className="px-6 py-4 whitespace-nowrap">
               Value (VSL)
             </th>
           </tr>
@@ -56,7 +56,7 @@ const Transactions = () => {
                   </Link>
                 </div>
               </td>
-              <td className="px-6 py-3">
+              <td className="px-6 py-3 whitespace-nowrap">
                 {moment(item.time).format('YYYY-MM-DD HH:mm:ss')}
               </td>
               <td className="px-6 py-3">

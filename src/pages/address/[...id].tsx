@@ -64,8 +64,8 @@ const BlocksDetails = () => {
 
   return (
     <Section>
-      <div className="flex flex-row justify-between items-center mb-10">
-        <h1 className="text-3xl font-bold">Wallet details</h1>
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10">
+        <h1 className="text-3xl font-bold mb-5 lg:mb-0">Wallet details</h1>
         <Search />
       </div>
 
@@ -161,13 +161,15 @@ const BlocksDetails = () => {
           <div className="px-5 py-3">
             <h4 className="text-md font-bold">Overview</h4>
           </div>
-          <div className="px-5 py-3 grid grid-cols-4 gap-4 text-sm">
-            <div className="text-gray-text font-bold my-3">Balance</div>
-            <div className="col-span-3 my-3">0.309860</div>
-            <div className="text-gray-text font-bold mb-3">Created at</div>
-            <div className="col-span-3 mb-3">22 February 2021, 16:03:08</div>
-            <div className="text-gray-text font-bold mb-3">Assets</div>
-            <div className="col-span-3 mb-3 flex items-center gap-3">
+          <div className="px-5 py-5 lg:py-3 flex flex-col lg:grid lg:grid-cols-4 gap-2 lg:gap-4 text-sm">
+            <div className="text-gray-text font-bold lg:my-3">Balance</div>
+            <div className="col-span-3 mb-3 lg:my-3 font-bold">0.309860</div>
+            <div className="text-gray-text font-bold lg:mb-3">Created at</div>
+            <div className="col-span-3 mb-3 font-medium">
+              22 February 2021, 16:03:08
+            </div>
+            <div className="text-gray-text font-bold lg:mb-3">Assets</div>
+            <div className="col-span-3 lg:mb-3 flex items-center gap-3 font-bold">
               $5.87
               <Popover className="relative">
                 {({ open }) => {
@@ -243,9 +245,11 @@ const BlocksDetails = () => {
           <div className="px-5 py-3">
             <h4 className="text-md font-bold">More info</h4>
           </div>
-          <div className="px-5 py-3 grid grid-cols-4 gap-4 text-sm">
-            <div className="text-gray-text font-bold my-3">Not available</div>
-            <div className="col-span-3 my-3"></div>
+          <div className="px-5 py-5 lg:py-3 flex flex-col lg:grid lg:grid-cols-4 gap-2 lg:gap-4 text-sm">
+            <div className="text-gray-text font-bold lg:my-3">
+              Not available
+            </div>
+            <div className="col-span-3 lg:my-3"></div>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import React from 'react';
 import moment from 'moment';
 import Link from 'next/link';
 import { MdOutlineAccessTimeFilled } from 'react-icons/md';
+import { RiCopperCoinFill } from 'react-icons/ri';
 
 import { TransactionDataDummy as Data } from '@data/index';
 
@@ -12,7 +13,7 @@ const ERCs = () => {
       <table className="w-full text-sm text-left">
         <thead className="text-xs text-gray-700 bg-white">
           <tr>
-            <th scope="col" className="px-6 py-4">
+            <th scope="col" className="px-6 py-4 whitespace-nowrap">
               Txn Hash
             </th>
             <th scope="col" className="px-6 py-4">
@@ -31,7 +32,7 @@ const ERCs = () => {
             <th scope="col" className="px-6 py-4">
               To
             </th>
-            <th scope="col" className="px-6 py-4">
+            <th scope="col" className="px-6 py-4 whitespace-nowrap">
               Value (VSL)
             </th>
             <th scope="col" className="px-6 py-4">
@@ -49,7 +50,9 @@ const ERCs = () => {
                   </Link>
                 </div>
               </td>
-              <td className="px-6 py-3">{moment(item.time).fromNow()}</td>
+              <td className="px-6 py-3 whitespace-nowrap">
+                {moment(item.time).fromNow()}
+              </td>
               <td className="px-6 py-3">
                 <Link href={`/address/${item.from}`} passHref>
                   <a className="text-primary truncate w-28 block">
@@ -63,7 +66,14 @@ const ERCs = () => {
                 </Link>
               </td>
               <td className="px-6 py-3">{item.value}</td>
-              <td className="px-6 py-3">{item.token}</td>
+              <td className="px-6 py-3 whitespace-nowrap">
+                <RiCopperCoinFill
+                  color="#75767FCC"
+                  size={14}
+                  className="inline mr-2"
+                />
+                {item.token}
+              </td>
             </tr>
           ))}
         </tbody>
