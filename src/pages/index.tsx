@@ -209,7 +209,7 @@ const Home = () => {
                     </div>
                     <div>
                       <Link href={`/tx/${item.id}`} passHref>
-                        <a className="text-base font-bold text-primary truncate w-56 sm:w-28 block">
+                        <a className="text-base font-bold text-primary truncate w-64 sm:w-28 block">
                           {item.id}
                         </a>
                       </Link>

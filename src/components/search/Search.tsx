@@ -50,7 +50,7 @@ const Search = ({ isHome }: ISearchProps) => {
           className={`focus:outline-none ml-3 font-medium text-ellipsis
             ${
               isHome
-                ? 'w-[calc(100vw-198px)] sm:w-72'
+                ? 'w-[calc(100vw-168px)] sm:w-72'
                 : 'w-[calc(100vw-276px)] lg:w-72'
             }`}
           type="search"

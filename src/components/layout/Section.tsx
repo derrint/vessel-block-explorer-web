@@ -12,7 +12,7 @@ type ISectionProps = {
 
 const Section = (props: ISectionProps) => (
   <div
-    className={`max-w-screen-lg mx-auto px-8 
+    className={`max-w-screen-lg mx-auto px-4 sm:px-8 
     ${
       props.isHeader || props.isFooter
         ? ''
