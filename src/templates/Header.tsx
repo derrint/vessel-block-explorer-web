@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <Background color="bg-white">
-      <Section yPadding="py-6">
+      <Section yPadding="py-6" isHeader>
         <NavbarTwoColumns
           logo={<Image src={Logo} alt="" height={33} width={164} />}
         >

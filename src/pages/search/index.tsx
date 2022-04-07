@@ -9,7 +9,7 @@ const SearchResult = () => {
   const { q } = router.query;
 
   return (
-    <Section className="flex flex-col min-h-[calc(100vh-219px)] justify-center gap-8">
+    <Section className="flex flex-col justify-center gap-8">
       <h1 className="text-3xl font-bold text-center">Search not found</h1>
       <p className="text-sm font-medium text-center">
         Oops! The search string you entered was:{' '}

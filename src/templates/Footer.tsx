@@ -30,7 +30,7 @@ const Footer = () => {
 
   return (
     <Background color="bg-white">
-      <Section yPadding="py-8">
+      <Section yPadding="py-8" isFooter>
         <div className="flex flex-wrap justify-between items-center">
           <div className="w-full sm:w-7/12 lg:w-5/12">
             <Link href="/">

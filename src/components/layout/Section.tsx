@@ -6,13 +6,19 @@ type ISectionProps = {
   yPadding?: string;
   children: ReactNode;
   className?: string;
+  isHeader?: boolean;
+  isFooter?: boolean;
 };
 
 const Section = (props: ISectionProps) => (
   <div
-    className={`max-w-screen-lg mx-auto px-8 ${
-      props.yPadding ? props.yPadding : 'py-16'
-    } ${props.className || ''}`}
+    className={`max-w-screen-lg mx-auto px-8 
+    ${
+      props.isHeader || props.isFooter
+        ? ''
+        : 'min-h-[calc(100vh-267px)] lg:min-h-[calc(100vh-219px)]'
+    } 
+    ${props.yPadding || 'py-16'} ${props.className || ''}`}
   >
     {(props.title || props.description) && (
       <div className="mb-12 text-center">
