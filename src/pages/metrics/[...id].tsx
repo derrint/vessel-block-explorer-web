@@ -59,9 +59,9 @@ const Metrics = () => {
 
   return (
     <Section>
-      <h1 className="text-3xl font-bold">Blockchain Metrics</h1>
+      <h1 className="text-xl sm:text-3xl font-bold">Blockchain Metrics</h1>
 
-      <div className="mt-10">
+      <div className="mt-5 sm:mt-10">
         <Tab.Group
           selectedIndex={selectedIndex}
           onChange={(idx: any) => {
@@ -78,7 +78,7 @@ const Metrics = () => {
             {metrics.map((item: any) => (
               <Tab
                 key={item.id}
-                className={`py-4 px-6 text-base leading-5 font-bold rounded-2xl
+                className={`py-3 sm:py-4 px-4 sm:px-6 text-sm sm:text-base leading-5 font-bold rounded-2xl
                     ${
                       selectedMetric === item.id
                         ? ' text-primary bg-white shadow-md '
@@ -92,7 +92,7 @@ const Metrics = () => {
           <Tab.Panels className="mt-6">
             {metrics.map((item, idx) => (
               <Tab.Panel key={idx} className="w-full">
-                <div className="flex justify-between items-center bg-white px-6 py-5 rounded-2xl	shadow-md">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white px-6 py-5 rounded-2xl shadow-md gap-3 sm:gap-0">
                   <div>
                     <h4 className="text-sm font-bold text-gray-text">
                       {item.label.total}
