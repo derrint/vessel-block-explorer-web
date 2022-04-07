@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 import { Tab, Transition, Popover } from '@headlessui/react';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { FiChevronDown, FiChevronUp, FiSearch } from 'react-icons/fi';
 import { HiOutlineQrcode } from 'react-icons/hi';
 import { IoMdCopy } from 'react-icons/io';
 import QRCode from 'react-qr-code';
@@ -58,9 +58,20 @@ const BlocksDetails = () => {
 
   return (
     <Section>
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10">
-        <h1 className="text-3xl font-bold mb-5 lg:mb-0">Wallet details</h1>
-        <Search />
+      <div className="flex flex-row sm:flex-col lg:flex-row justify-between items-center sm:items-start lg:items-center mb-10">
+        <h1 className="text-xl sm:text-3xl font-bold mb-0 sm:mb-5 lg:mb-0">
+          Wallet details
+        </h1>
+
+        <Search className="hidden sm:flex" />
+
+        <button
+          type="submit"
+          className="flex sm:hidden gap-2 items-center justify-center bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end h-14 w-16 rounded-2xl shadow-md text-white"
+          onClick={() => showModal('search')}
+        >
+          <FiSearch size={20} />
+        </button>
       </div>
 
       <div className="flex items-center gap-4 mb-5">
@@ -70,7 +81,7 @@ const BlocksDetails = () => {
           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAA5BJREFUeF7t3b2xFWcQRdG5NhaZUCUPosAlBaJRHDJIArAgFizkSkEs41RL+/k9X7/de86dv5p5ffrz3T/P4b+Pf7yZdv/l5+/p+rr4KwEMYQIYP64uAQxhCWD8nhIAAWp5CWAESwDjVwIgPy4vAQxhCWD8SgDkx+UlgCEsAYxfCYD8uLwEMIQlgPErAZAfl5cAhrAEMH4lAPLj8hLAEJYAxq8EWO+BOL/z5XozihMgAbYOJcCW/3z1BJiPYNtAAmz5z1dPgPkItg0kwJb/fPUEmI9g20ACbPnPV0+A+Qi2DSTAlv989QSYj2DbQAJs+c9XT4D5CLYNJMCW/3z1BJiPYNvAeQH0H1jfjl73r+vPnwfQfyAB7AUVCYAJvhZY10+ABLB3BGkEq8G6Ps6fHwrV/pVfCYAG6AASAN+ypQBx/iWADmC9ByUAvicwAew0bM2vYwCMgHWC6foJkACdBooDugf2E9BZgPjHZyH9BBD+hwdQApQApKD+BJUAhP8/kACff/xN3wv49e09IrRyjVBb3QXQ9d9++E6beCUA8eNjAFv9eRLgf/7FkARIAAqRfgIIX8cATweBdjMI/esYoLOAzgJ0J6J6vRBDiz+dBTwlQAmgOxHVlwBdCSSBtLjrAF0HIIe6DkD4ug7QdQC8nY3+dR2gs4DOAnQnovrzZwHXPx9P06v44SeCYnibQALcnh93nwCM8PYGEuD2/Lj7BGCEtzeQALfnx90nACO8vYEEuD0/7j4BGOHtDSTA7flx9wnACG9vIAFuz4+7TwBGeHsDCXB7ftx9AjDC2xt4/fX1A70fYP1AxG383r0+EZUAPoPpFhJgin+/eALsZzDtIAGm+PeLJ8B+BtMOEmCKf794AuxnMO0gAab494snwH4G0w4SYIp/v3gC7Gcw7SABpvj3iyfAfgbTDhJgin+/eALsZzDtgAW4/n4ABaDTu/48xPknghLAFE4A4zf/YAS2f/8NISWAKVACGL8SAPlxeQlgCEsA41cCID8uLwEMYQlg/EoA5MflJYAhLAGMXwmA/Li8BDCEJYDxKwGQH5eXAIawBDB+JQDy4/ISwBByAugArt9PN/wPf/dQ+SWAThDr1ztQAuAAtTwBxl/d0gFqfQIkADnUMQDh2xeXACUAWVgCEL59cQlQApCFJQDh2xeXACUAWVgCEL59cQlQApCFJQDh2xeXACUAWVgCEL598ToB/gVk5De+2egiggAAAABJRU5ErkJggg=="
           alt=""
         />
-        <h2 className="text-2xl font-bold">{address}</h2>
+        <h2 className="text-lg sm:text-2xl font-bold">{address}</h2>
         <IoMdCopy
           size={24}
           className="cursor-pointer"
@@ -100,9 +111,9 @@ const BlocksDetails = () => {
         </Modal>
       </div>
 
-      <div className="flex gap-6">
-        <div className="w-6/12 flex flex-col rounded-2xl shadow-md bg-white divide-y divide-gray-divider">
-          <div className="px-5 py-3">
+      <div className="flex flex-col sm:flex-row gap-6">
+        <div className="w-full sm:w-6/12 flex flex-col rounded-2xl shadow-md bg-white sm:divide-y sm:divide-gray-divider">
+          <div className="px-5 pt-5 pb-3">
             <h4 className="text-md font-bold">Overview</h4>
           </div>
           <div className="px-5 py-5 lg:py-3 flex flex-col lg:grid lg:grid-cols-4 gap-2 lg:gap-4 text-sm">
@@ -193,8 +204,8 @@ const BlocksDetails = () => {
             </div>
           </div>
         </div>
-        <div className="w-6/12 flex flex-col rounded-2xl shadow-md bg-white divide-y divide-gray-divider">
-          <div className="px-5 py-3">
+        <div className="w-full sm:w-6/12 flex flex-col rounded-2xl shadow-md bg-white sm:divide-y sm:divide-gray-divider">
+          <div className="px-5 pt-5 pb-3">
             <h4 className="text-md font-bold">More info</h4>
           </div>
           <div className="px-5 py-5 lg:py-3 flex flex-col lg:grid lg:grid-cols-4 gap-2 lg:gap-4 text-sm">
@@ -217,7 +228,7 @@ const BlocksDetails = () => {
             {tabs.map((item: any) => (
               <Tab
                 key={item.id}
-                className={`py-4 px-6 whitespace-nowrap text-base leading-5 font-bold rounded-2xl
+                className={`py-3 sm:py-4 px-4 sm:px-6 whitespace-nowrap text-sm sm:text-base leading-5 font-bold rounded-2xl
                     ${
                       tabs[selectedIndex]?.id === item.id
                         ? ' text-primary bg-white shadow-md'
@@ -237,6 +248,16 @@ const BlocksDetails = () => {
           </Tab.Panels>
         </Tab.Group>
       </div>
+
+      <Modal name="search">
+        <div className="p-6 pt-12 text-left bg-white shadow-xl rounded-2xl">
+          <h1 className="font-bold text-3xl mb-2">Search</h1>
+          <p className="font-medium text-sm text-gray-text mb-5">
+            Search transaction, block, wallet (tx)
+          </p>
+          <Search inputClassName="!w-full" />
+        </div>
+      </Modal>
     </Section>
   );
 };
