@@ -32,6 +32,7 @@ const Home = () => {
       value: '40 txns',
       icon: <FiLayers size={20} />,
       hash: '0xa15c13e183bfcefgj898as7sas24',
+      amount: '2.890 VES',
     },
     {
       id: 14337225,
@@ -39,6 +40,7 @@ const Home = () => {
       value: '40 txns',
       icon: <FiLayers size={20} />,
       hash: '0xa15c13e183bfcefgj898as7sas24',
+      amount: '2.890 VES',
     },
     {
       id: 14337225,
@@ -46,6 +48,7 @@ const Home = () => {
       value: '40 txns',
       icon: <FiLayers size={20} />,
       hash: '0xa15c13e183bfcefgj898as7sas24',
+      amount: '2.890 VES',
     },
     {
       id: 14337225,
@@ -53,6 +56,7 @@ const Home = () => {
       value: '40 txns',
       icon: <BiCube size={20} />,
       hash: '0xa15c13e183bfcefgj898as7sas24',
+      amount: '2.890 VES',
     },
     {
       id: 14337225,
@@ -60,6 +64,7 @@ const Home = () => {
       value: '40 txns',
       icon: <BiCube size={20} />,
       hash: '0xa15c13e183bfcefgj898as7sas24',
+      amount: '2.890 VES',
     },
   ];
 
@@ -170,10 +175,13 @@ const Home = () => {
                       {item.value}
                     </div>
                     <Link href={`/address/${item.hash}`} passHref>
-                      <a className="text-sm font-medium text-primary truncate w-28 sm:w-auto lg:w-28 block">
+                      <a className="text-sm font-medium text-primary truncate w-28 sm:w-auto lg:w-28 hidden lg:block">
                         {item.hash}
                       </a>
                     </Link>
+                    <div className="text-xs font-medium text-gray-text lg:hidden">
+                      {item.amount}
+                    </div>
                   </div>
                 </div>
               );
