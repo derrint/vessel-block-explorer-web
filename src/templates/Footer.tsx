@@ -45,7 +45,7 @@ const Footer = () => {
           </div>
 
           <nav className="w-full lg:w-7/12 mt-6 lg:mt-0">
-            <ul className="navbar flex gap-8 lg:gap-10 justify-start lg:justify-end items-center font-medium text-xl text-gray-800">
+            <ul className="navbar flex flex-col sm:flex-row gap-4 sm:gap-8 lg:gap-10 justify-start lg:justify-end items-start sm:items-center font-medium text-xl text-gray-800">
               {menus.map((item: any) => {
                 return (
                   <li
