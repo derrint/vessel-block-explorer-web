@@ -2,6 +2,7 @@ import React from 'react';
 
 import moment from 'moment';
 import Link from 'next/link';
+import { FiSearch } from 'react-icons/fi';
 import { MdOutlineAccessTimeFilled } from 'react-icons/md';
 
 import { Section } from '@components/layout';
@@ -11,9 +12,17 @@ import { BlocksDataDummy as Data } from '@data/index';
 const Blocks = () => {
   return (
     <Section>
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10">
-        <h1 className="text-3xl font-bold mb-5 lg:mb-0">Blocks</h1>
-        <Search />
+      <div className="flex flex-row sm:flex-col lg:flex-row justify-between items-center sm:items-start lg:items-center mb-10">
+        <h1 className="text-3xl font-bold mb-0 sm:mb-5 lg:mb-0">Blocks</h1>
+
+        <Search className="hidden sm:flex" />
+
+        <button
+          type="submit"
+          className="flex sm:hidden gap-2 items-center justify-center bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end h-14 w-16 rounded-2xl shadow-md text-white"
+        >
+          <FiSearch size={20} />
+        </button>
       </div>
       <div className="relative overflow-x-auto shadow-md rounded-2xl">
         <table className="w-full text-sm text-left">
@@ -51,7 +60,9 @@ const Blocks = () => {
                     <a className="text-primary">{item.block}</a>
                   </Link>
                 </td>
-                <td className="px-6 py-3">{moment(item.age).fromNow()}</td>
+                <td className="px-6 py-3 whitespace-nowrap">
+                  {moment(item.age).fromNow()}
+                </td>
                 <td className="px-6 py-3">{item.txn}</td>
                 <td className="px-6 py-3">
                   <Link href={`/address/${item.validator}`} passHref>
@@ -60,7 +71,7 @@ const Blocks = () => {
                     </a>
                   </Link>
                 </td>
-                <td className="px-6 py-3">{item.gas_used}</td>
+                <td className="px-6 py-3 whitespace-nowrap">{item.gas_used}</td>
               </tr>
             ))}
           </tbody>

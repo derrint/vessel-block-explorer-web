@@ -7,9 +7,10 @@ import { DropdownMenu } from '@components/dropdown';
 
 type ISearchProps = {
   isHome?: boolean;
+  className?: string;
 };
 
-const Search = ({ isHome }: ISearchProps) => {
+const Search = ({ isHome, className }: ISearchProps) => {
   const filters = [
     {
       id: 'all',
@@ -37,7 +38,12 @@ const Search = ({ isHome }: ISearchProps) => {
   const { q, filter } = searchParams;
 
   return (
-    <div className="flex flex-col sm:flex-row justify-center items-center text-center relative gap-3">
+    <div
+      className={`flex flex-col sm:flex-row items-center text-center relative gap-3 w-full 
+      ${isHome ? 'justify-center' : 'justify-end'}
+      ${className || ''}
+      `}
+    >
       <div className="border-x border-y border-gray-200 bg-white px-5 h-14 rounded-2xl text-sm focus-within:border-primary flex justify-start items-center shadow-md">
         <DropdownMenu
           title={filters.find((x) => x.id === filter)?.label as any}
@@ -51,7 +57,7 @@ const Search = ({ isHome }: ISearchProps) => {
             ${
               isHome
                 ? 'w-[calc(100vw-168px)] sm:w-72'
-                : 'w-[calc(100vw-276px)] lg:w-72'
+                : 'w-[calc(100vw-168px)] sm:w-[calc(100vw-276px)] lg:w-72'
             }`}
           type="search"
           name="search"
