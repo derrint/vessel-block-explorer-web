@@ -34,8 +34,8 @@ const TxDetails = () => {
         </button>
       </div>
 
-      <div className="flex flex-col rounded-2xl shadow-md bg-white divide-y sm:divide-gray-divider">
-        <div className="px-5 py-3">
+      <div className="flex flex-col rounded-2xl shadow-md bg-white sm:divide-y sm:divide-gray-divider">
+        <div className="px-5 pt-5 pb-3">
           <h4 className="text-md font-bold">Overview</h4>
         </div>
         <div className="px-5 py-5 sm:py-3 flex flex-col sm:grid sm:grid-cols-4 gap-2 sm:gap-4 text-sm">
