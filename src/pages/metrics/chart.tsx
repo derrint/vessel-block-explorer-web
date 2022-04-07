@@ -6,7 +6,7 @@ import { createChart } from 'lightweight-charts';
 import { DropdownMenu } from '@components/dropdown';
 import { ChartDataDummy } from '@data/index';
 
-const TransactionChart = () => {
+const Chart = ({ title }: any) => {
   const ref = React.useRef() as React.MutableRefObject<HTMLInputElement>;
   const [interval, setInterval] = React.useState('daily');
   const [intervalTitle, setIntervalTitle] = React.useState('Daily');
@@ -92,7 +92,9 @@ const TransactionChart = () => {
     <>
       <div className="flex flex-col sm:flex-row justify-between items-start mb-8 gap-4 sm:gap-0">
         <div>
-          <h3 className="text-2xl font-bold">{intervalTitle} Transaction</h3>
+          <h3 className="text-2xl font-bold">
+            {intervalTitle} {title}
+          </h3>
           <h4 className="text-lg font-medium">All Time</h4>
         </div>
         <div className="flex flex-row items-center gap-5">
@@ -111,4 +113,4 @@ const TransactionChart = () => {
   );
 };
 
-export default TransactionChart;
+export default Chart;
