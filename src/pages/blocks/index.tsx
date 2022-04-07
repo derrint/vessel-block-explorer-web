@@ -13,6 +13,7 @@ import { useActions } from '@overmind/index';
 
 const Blocks = () => {
   const { showModal } = useActions();
+
   return (
     <Section>
       <div className="flex flex-row sm:flex-col lg:flex-row justify-between items-center sm:items-start lg:items-center mb-10">

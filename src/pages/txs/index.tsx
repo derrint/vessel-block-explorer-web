@@ -6,10 +6,14 @@ import { FiSearch } from 'react-icons/fi';
 import { MdOutlineAccessTimeFilled } from 'react-icons/md';
 
 import { Section } from '@components/layout';
+import { Modal } from '@components/modal';
 import { Search } from '@components/search';
 import { TransactionDataDummy as Data } from '@data/index';
+import { useActions } from '@overmind/index';
 
 const Transactions = () => {
+  const { showModal } = useActions();
+
   return (
     <Section>
       <div className="flex flex-row sm:flex-col lg:flex-row justify-between items-center sm:items-start lg:items-center mb-10">
@@ -22,6 +26,7 @@ const Transactions = () => {
         <button
           type="submit"
           className="flex sm:hidden gap-2 items-center justify-center bg-gradient-to-r from-gradient-primary-start to-gradient-primary-end h-14 w-16 rounded-2xl shadow-md text-white"
+          onClick={() => showModal('search')}
         >
           <FiSearch size={20} />
         </button>
@@ -97,6 +102,16 @@ const Transactions = () => {
           </tbody>
         </table>
       </div>
+
+      <Modal name="search">
+        <div className="p-6 pt-12 text-left bg-white shadow-xl rounded-2xl">
+          <h1 className="font-bold text-3xl mb-2">Search</h1>
+          <p className="font-medium text-sm text-gray-text mb-5">
+            Search transaction, block, wallet (tx)
+          </p>
+          <Search inputClassName="!w-full" />
+        </div>
+      </Modal>
     </Section>
   );
 };
