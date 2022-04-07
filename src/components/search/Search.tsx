@@ -5,7 +5,11 @@ import { FiSearch } from 'react-icons/fi';
 
 import { DropdownMenu } from '@components/dropdown';
 
-const Search = () => {
+type ISearchProps = {
+  isHome?: boolean;
+};
+
+const Search = ({ isHome }: ISearchProps) => {
   const filters = [
     {
       id: 'all',
@@ -43,7 +47,8 @@ const Search = () => {
           }}
         />
         <input
-          className="focus:outline-none ml-3 sm:w-72 font-medium"
+          className={`focus:outline-none ml-3 font-medium 
+            ${isHome ? 'w-72' : 'w-[calc(100vw-276px)] lg:w-72'}`}
           type="search"
           name="search"
           placeholder="Search transaction, block, wallet (tx)"

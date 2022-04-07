@@ -112,7 +112,7 @@ const Home = () => {
         Vessel Blockchain Explorer
       </h1>
 
-      <Search />
+      <Search isHome />
 
       <div className="mt-12">
         <h2 className="text-xl font-bold">Blockchain Metrics</h2>

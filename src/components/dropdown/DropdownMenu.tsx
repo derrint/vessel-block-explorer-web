@@ -16,7 +16,7 @@ const DropdownMenu = (props: IDropdownMenuProps) => {
       as="div"
       className={`relative inline-block text-left ${props.className}`}
     >
-      <Menu.Button className="inline-flex gap-2 justify-center w-full text-sm font-bold focus:outline-none">
+      <Menu.Button className="inline-flex gap-2 justify-center w-full text-sm font-bold focus:outline-none whitespace-nowrap">
         {props.title}
         <div className="pt-px text-black">
           <FaSortDown size={14} />

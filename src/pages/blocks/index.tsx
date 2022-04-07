@@ -11,8 +11,8 @@ import { BlocksDataDummy as Data } from '@data/index';
 const Blocks = () => {
   return (
     <Section>
-      <div className="flex flex-row justify-between items-center mb-10">
-        <h1 className="text-3xl font-bold">Blocks</h1>
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10">
+        <h1 className="text-3xl font-bold mb-5 lg:mb-0">Blocks</h1>
         <Search />
       </div>
       <div className="relative overflow-x-auto shadow-md rounded-2xl">
