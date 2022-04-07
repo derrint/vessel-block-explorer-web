@@ -90,23 +90,20 @@ const TransactionChart = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-between items-center mb-5">
+      <div className="flex flex-col sm:flex-row justify-between items-start mb-8 gap-4 sm:gap-0">
         <div>
-          <h3 className="text-2xl font-bold mt-2">
-            {intervalTitle} Transaction
-          </h3>
-          <h4 className="text-s">All Time</h4>
+          <h3 className="text-2xl font-bold">{intervalTitle} Transaction</h3>
+          <h4 className="text-lg font-medium">All Time</h4>
         </div>
-        <div className="flex flex-row items-center">
-          <h4 className="text-xs text-gray-text">Interval</h4>
-          <div className="mx-3">
-            <DropdownMenu
-              title={intervalTitle}
-              items={optionsInterval}
-              className="rounded outline outline-1 pl-2"
-              onChange={(v: string) => handleChange(v)}
-            />
-          </div>
+        <div className="flex flex-row items-center gap-5">
+          <h4 className="text-sm font-bold text-gray-text">Interval</h4>
+          <DropdownMenu
+            title={intervalTitle}
+            items={optionsInterval}
+            className="rounded-lg outline outline-1 py-2 px-3 outline-gray-200 w-[calc(100vw-152px)] sm:w-auto"
+            textClassName="text-sm font-bold"
+            onChange={(v: string) => handleChange(v)}
+          />
         </div>
       </div>
       <div className="w-full" ref={ref} />

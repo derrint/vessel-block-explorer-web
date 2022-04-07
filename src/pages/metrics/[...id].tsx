@@ -7,7 +7,6 @@ import Router, { useRouter } from 'next/router';
 import { Section } from '@components/layout';
 
 import TransactionChart from './transactionchart';
-import WalletChart from './walletchart';
 
 const Metrics = () => {
   const router = useRouter();
@@ -114,7 +113,7 @@ const Metrics = () => {
                 )}
                 {item.id === 'wallets' && (
                   <div className="flex flex-col bg-white mt-5 px-6 py-5 rounded-2xl	shadow-md">
-                    <WalletChart />
+                    <TransactionChart />
                   </div>
                 )}
               </Tab.Panel>

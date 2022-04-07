@@ -7,6 +7,7 @@ type IDropdownMenuProps = {
   title: string;
   items: any;
   className?: string;
+  textClassName?: string;
   onChange?: any;
 };
 
@@ -16,7 +17,9 @@ const DropdownMenu = (props: IDropdownMenuProps) => {
       as="div"
       className={`relative inline-block text-left ${props.className}`}
     >
-      <Menu.Button className="inline-flex gap-2 justify-center w-full text-sm font-bold focus:outline-none whitespace-nowrap">
+      <Menu.Button
+        className={`inline-flex gap-2 justify-between w-full text-sm font-bold focus:outline-none whitespace-nowrap ${props.textClassName}`}
+      >
         {props.title}
         <div className="pt-px text-black">
           <FaSortDown size={14} />
