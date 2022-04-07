@@ -17,7 +17,9 @@ const Blocks = () => {
   return (
     <Section>
       <div className="flex flex-row sm:flex-col lg:flex-row justify-between items-center sm:items-start lg:items-center mb-10">
-        <h1 className="text-3xl font-bold mb-0 sm:mb-5 lg:mb-0">Blocks</h1>
+        <h1 className="text-xl sm:text-3xl font-bold mb-0 sm:mb-5 lg:mb-0">
+          Blocks
+        </h1>
 
         <Search className="hidden sm:flex" />
 
