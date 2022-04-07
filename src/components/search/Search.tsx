@@ -8,9 +8,10 @@ import { DropdownMenu } from '@components/dropdown';
 type ISearchProps = {
   isHome?: boolean;
   className?: string;
+  inputClassName?: string;
 };
 
-const Search = ({ isHome, className }: ISearchProps) => {
+const Search = ({ isHome, className, inputClassName }: ISearchProps) => {
   const filters = [
     {
       id: 'all',
@@ -58,7 +59,7 @@ const Search = ({ isHome, className }: ISearchProps) => {
               isHome
                 ? 'w-[calc(100vw-168px)] sm:w-72'
                 : 'w-[calc(100vw-168px)] sm:w-[calc(100vw-276px)] lg:w-72'
-            }`}
+            } ${inputClassName || ''}`}
           type="search"
           name="search"
           placeholder="Search transaction, block, wallet (tx)"

@@ -12,7 +12,7 @@ export const state: State = {
     isLoggedIn: undefined,
   },
   modal: {
-    type: null,
+    name: null,
     isVisible: false,
   },
 };

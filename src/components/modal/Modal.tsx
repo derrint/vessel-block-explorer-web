@@ -1,11 +1,13 @@
 import { ReactNode, Fragment } from 'react';
 
 import { Dialog, Transition } from '@headlessui/react';
+import { IoCloseCircleOutline } from 'react-icons/io5';
 
 import { useActions, useState } from '@overmind/index';
 
 type IModalProps = {
   children: ReactNode;
+  name: string;
 };
 
 const Modal = (props: IModalProps) => {
@@ -13,7 +15,11 @@ const Modal = (props: IModalProps) => {
   const { hideModal } = useActions();
 
   return (
-    <Transition appear show={modal.isVisible} as={Fragment}>
+    <Transition
+      appear
+      show={modal.isVisible && modal.name === props.name}
+      as={Fragment}
+    >
       <Dialog
         as="div"
         className="fixed inset-0 z-10 overflow-y-auto"
@@ -48,7 +54,17 @@ const Modal = (props: IModalProps) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            {props.children}
+            <div className="inline-block overflow-hidden text-center align-middle transition-all transform">
+              <button
+                className="absolute top-3 right-3"
+                onClick={() => {
+                  hideModal();
+                }}
+              >
+                <IoCloseCircleOutline size={32} color="#919199" />
+              </button>
+              {props.children}
+            </div>
           </Transition.Child>
         </div>
       </Dialog>

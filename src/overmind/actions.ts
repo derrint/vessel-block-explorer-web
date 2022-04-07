@@ -9,7 +9,7 @@ export const setLoading = async (context: any, payload: any) => {
 export const showModal = async (context: any, payload: string) => {
   context.state.modal = {
     ...context.state.modal,
-    type: payload,
+    name: payload,
     isVisible: true,
   };
 };

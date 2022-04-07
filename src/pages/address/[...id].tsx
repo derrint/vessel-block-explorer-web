@@ -16,7 +16,7 @@ import ERCs from './erc';
 import Transactions from './txs';
 
 const BlocksDetails = () => {
-  const { showModal, hideModal } = useActions();
+  const { showModal } = useActions();
 
   const address = '0x2281774720dab09c';
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -88,23 +88,13 @@ const BlocksDetails = () => {
           }}
         />
 
-        <Modal>
-          <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-center align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-            <h3 className="text-2xl font-bold leading-6 text-gray-900">
+        <Modal name="qr-address">
+          <div className="max-w-md p-6 pt-16 text-center bg-white shadow-xl rounded-2xl">
+            <h3 className="text-xl font-bold leading-6 text-gray-900">
               {address}
             </h3>
-            <div className="my-10 flex justify-center">
-              <QRCode value={address} />
-            </div>
-
-            <div className="mt-4">
-              <button
-                type="button"
-                className="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200"
-                onClick={hideModal}
-              >
-                Got it, thanks!
-              </button>
+            <div className="mt-5 flex justify-center">
+              <QRCode value={address} size={180} />
             </div>
           </div>
         </Modal>
