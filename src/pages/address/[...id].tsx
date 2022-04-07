@@ -163,7 +163,15 @@ const BlocksDetails = () => {
           </div>
           <div className="px-5 py-5 lg:py-3 flex flex-col lg:grid lg:grid-cols-4 gap-2 lg:gap-4 text-sm">
             <div className="text-gray-text font-bold lg:my-3">Balance</div>
-            <div className="col-span-3 mb-3 lg:my-3 font-bold">0.309860</div>
+            <div className="col-span-3 mb-3 lg:my-3 font-bold">
+              0.309860
+              <img
+                src="https://derrint.sirv.com/Images/vessel/block-explorer/icons/icon-vessel.png"
+                alt=""
+                className="w-6 inline mx-2"
+              />
+              <span className="font-medium">VSL</span>
+            </div>
             <div className="text-gray-text font-bold lg:mb-3">Created at</div>
             <div className="col-span-3 mb-3 font-medium">
               22 February 2021, 16:03:08
