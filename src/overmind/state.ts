@@ -1,4 +1,10 @@
-const state = {
+type State = {
+  isLoading: boolean;
+  auth: any;
+  modal: any;
+};
+
+export const state: State = {
   // ----- GLOBAL props -----
   isLoading: false,
   auth: {
@@ -10,5 +16,3 @@ const state = {
     isVisible: false,
   },
 };
-
-export default state;
