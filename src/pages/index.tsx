@@ -201,24 +201,24 @@ const Home = () => {
               return (
                 <div
                   key={item.id}
-                  className="flex items-start justify-between mt-3 pt-3 first:mt-0 first:pt-0"
+                  className="flex flex-col sm:flex-row items-start justify-between mt-3 pt-3 first:mt-0 first:pt-0 gap-2 sm:gap-0"
                 >
-                  <div className="flex items-center gap-4 w-5/12">
-                    <div className="flex bg-gray-background rounded-lg p-2">
+                  <div className="flex items-center gap-4 w-full sm:w-5/12">
+                    <div className="bg-gray-background rounded-lg p-2 hidden sm:flex">
                       {item.icon}
                     </div>
                     <div>
                       <Link href={`/tx/${item.id}`} passHref>
-                        <a className="text-base font-bold text-primary truncate w-28 block">
+                        <a className="text-base font-bold text-primary truncate w-56 sm:w-28 block">
                           {item.id}
                         </a>
                       </Link>
-                      <div className="text-xs font-medium text-gray-text">
+                      <div className="text-xs font-medium text-gray-text hidden sm:block">
                         {item.timestamp}
                       </div>
                     </div>
                   </div>
-                  <div className="w-5/12">
+                  <div className="w-full sm:w-5/12 flex flex-row sm:flex-col gap-2 sm:gap-0">
                     <div className="text-sm font-medium truncate w-40">
                       From{' '}
                       <Link href={`/address/${item.from}`} passHref>
@@ -232,8 +232,21 @@ const Home = () => {
                       </Link>
                     </div>
                   </div>
-                  <div className="text-right text-xs font-medium w-2/12">
+                  <div className="text-right text-xs font-medium w-full sm:w-2/12 hidden sm:block">
                     {item.value}
+                  </div>
+                  <div className="flex sm:hidden bg-[#F0F3FA] rounded-xl px-3 py-1 w-full justify-between">
+                    <div className="text-xs font-extrabold text-[#2D4786] flex items-center gap-2">
+                      <img
+                        src="https://derrint.sirv.com/Images/vessel/block-explorer/icons/icon-vessel.png"
+                        alt=""
+                        className="w-3 inline"
+                      />
+                      {item.value}
+                    </div>
+                    <div className="text-xs font-semibold text-[#9EAFD6]">
+                      {item.timestamp}
+                    </div>
                   </div>
                 </div>
               );
