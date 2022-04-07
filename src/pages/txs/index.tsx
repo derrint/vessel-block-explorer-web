@@ -11,8 +11,8 @@ import { TransactionDataDummy as Data } from '@data/index';
 const Transactions = () => {
   return (
     <Section>
-      <div className="flex flex-row justify-between items-center mb-10">
-        <h1 className="text-3xl font-bold">Transactions</h1>
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10">
+        <h1 className="text-3xl font-bold mb-5 lg:mb-0">Transactions</h1>
         <Search />
       </div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-2xl">
@@ -26,7 +26,7 @@ const Transactions = () => {
                 Block
               </th>
               <th scope="col" className="px-6 py-4">
-                <span className="flex items-center">
+                <span className="flex items-center whitespace-nowrap">
                   Time (UTC){' '}
                   <MdOutlineAccessTimeFilled
                     size={15}
@@ -63,7 +63,7 @@ const Transactions = () => {
                     </Link>
                   </div>
                 </td>
-                <td className="px-6 py-3">
+                <td className="px-6 py-3 whitespace-nowrap">
                   {moment(item.time).format('YYYY-MM-DD HH:mm:ss')}
                 </td>
                 <td className="px-6 py-3">
