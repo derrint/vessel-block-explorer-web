@@ -11,8 +11,8 @@ const BlockDetails = () => {
   const blockNumber = 'BWQyzbv91RiqL94DoCcXTYUqvpUrYdMF3N1N6qHNFtJm';
   return (
     <Section>
-      <div className="flex flex-row justify-between items-center mb-10">
-        <h1 className="text-3xl font-bold">Block details</h1>
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10">
+        <h1 className="text-3xl font-bold mb-5 lg:mb-0">Block details</h1>
         <Search />
       </div>
       <div className="flex flex-col rounded-2xl shadow-md bg-white divide-y divide-gray-divider">
