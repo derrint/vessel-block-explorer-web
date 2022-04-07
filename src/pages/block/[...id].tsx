@@ -30,13 +30,13 @@ const BlockDetails = () => {
           <div className="col-span-3 mb-3">Total 536 transactions</div>
           <div className="text-gray-text font-bold mb-3">Validator</div>
           <div className="col-span-3 mb-3">
-            <p className="flex flex-row break-words items-center">
+            <p>
               <Link href={`/address/${blockNumber}`} passHref>
-                <a className="text-primary">{blockNumber}</a>
+                <a className="text-primary inline break-all">{blockNumber}</a>
               </Link>
               <IoMdCopy
                 size={15}
-                className="cursor-pointer mx-2"
+                className="cursor-pointer mx-2 inline"
                 color="#6151FF"
                 onClick={() => {
                   copyToClipboard(blockNumber);

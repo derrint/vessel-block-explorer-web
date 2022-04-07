@@ -14,8 +14,8 @@ const TxDetails = () => {
 
   return (
     <Section>
-      <div className="flex flex-row justify-between items-center mb-10">
-        <h1 className="text-3xl font-bold">Transaction details</h1>
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10">
+        <h1 className="text-3xl font-bold mb-5 lg:mb-0">Transaction details</h1>
         <Search />
       </div>
       <div className="flex flex-col rounded-2xl shadow-md bg-white divide-y divide-gray-divider">
@@ -24,12 +24,12 @@ const TxDetails = () => {
         </div>
         <div className="px-5 py-3 grid grid-cols-4 gap-4 text-sm">
           <div className="text-gray-text font-bold my-3">Transaction Hash</div>
-          <div className="col-span-3 my-3">
+          <div className="col-span-3 my-3 break-all">
             0x73a201a8694c1a689153c3f320d410e290d0504a7e9775c931eeed5dbade8f7c
           </div>
           <div className="text-gray-text font-bold mb-3">Status</div>
           <div className="col-span-3 mmby-3 text-green-500">
-            <p className="flex flex-row break-words items-center">
+            <p className="flex flex-row items-center">
               <IoCheckmarkCircle
                 size={15}
                 className="mr-2"
@@ -41,7 +41,7 @@ const TxDetails = () => {
           <div className="text-gray-text font-bold mb-3">Block</div>
           <div className="col-span-3 mb-3">
             <Link href={`/block/${blockNumber}`} passHref>
-              <a className="text-primary">{blockNumber}</a>
+              <a className="text-primary break-all">{blockNumber}</a>
             </Link>
           </div>
           <div className="text-gray-text font-bold mb-3">Timestamp</div>
@@ -50,13 +50,13 @@ const TxDetails = () => {
           </div>
           <div className="text-gray-text font-bold mb-3">From</div>
           <div className="col-span-3 mb-3">
-            <p className="flex flex-row break-words items-center">
+            <p>
               <Link href={`/address/${address}`} passHref>
-                <a className="text-primary">{address}</a>
+                <a className="text-primary inline break-all">{address}</a>
               </Link>
               <IoMdCopy
                 size={15}
-                className="cursor-pointer mx-2"
+                className="cursor-pointer mx-2 inline"
                 color="#6151FF"
                 onClick={() => {
                   copyToClipboard(address);
@@ -66,13 +66,13 @@ const TxDetails = () => {
           </div>
           <div className="text-gray-text font-bold mb-3">To</div>
           <div className="col-span-3 mb-3">
-            <p className="flex flex-row break-words items-center">
+            <p>
               <Link href={`/address/${address}`} passHref>
-                <a className="text-primary">{address}</a>
+                <a className="text-primary inline break-all">{address}</a>
               </Link>
               <IoMdCopy
                 size={15}
-                className="cursor-pointer mx-2"
+                className="cursor-pointer mx-2 inline"
                 color="#6151FF"
                 onClick={() => {
                   copyToClipboard(address);
