@@ -158,7 +158,7 @@ const Home = () => {
                     </div>
                     <div>
                       <Link href={`/block/${item.id}`} passHref>
-                        <a className="text-base font-bold text-primary truncate w-24 block">
+                        <a className="text-sm sm:text-base font-bold text-primary truncate w-24 block">
                           {item.id}
                         </a>
                       </Link>
@@ -209,7 +209,7 @@ const Home = () => {
                     </div>
                     <div>
                       <Link href={`/tx/${item.id}`} passHref>
-                        <a className="text-base font-bold text-primary truncate w-64 sm:w-28 block">
+                        <a className="text-sm sm:text-base font-bold text-primary truncate w-64 sm:w-28 block">
                           {item.id}
                         </a>
                       </Link>
@@ -219,13 +219,13 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="w-full sm:w-5/12 flex flex-row sm:flex-col gap-2 sm:gap-0">
-                    <div className="text-sm font-medium truncate w-40">
+                    <div className="text-xs sm:text-sm font-medium truncate w-40">
                       From{' '}
                       <Link href={`/address/${item.from}`} passHref>
                         <a className="text-primary">{item.from}</a>
                       </Link>
                     </div>
-                    <div className="text-sm font-medium truncate w-40">
+                    <div className="text-xs sm:text-sm font-medium truncate w-40">
                       To{' '}
                       <Link href={`/address/${item.to}`} passHref>
                         <a className="text-primary">{item.to}</a>
