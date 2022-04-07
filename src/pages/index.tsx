@@ -115,12 +115,12 @@ const Home = () => {
       <Search />
 
       <div className="mt-12">
-        <h2 className="text-xt font-bold">Blockchain Metrics</h2>
-        <div className="flex justify-between gap-6 mt-4">
+        <h2 className="text-xl font-bold">Blockchain Metrics</h2>
+        <div className="flex flex-col lg:flex-row justify-between gap-6 mt-4">
           {metrics.map((item: any, index: number) => {
             return (
               <Link key={index} href={`/metrics/${item.id}`}>
-                <a className="flex justify-between items-center bg-white px-6 py-5 w-4/12 rounded-2xl	shadow-md">
+                <a className="flex justify-between items-center bg-white px-6 py-5  w-full lg:w-1/3 rounded-2xl	shadow-md">
                   <div>
                     <h4 className="text-sm font-bold text-gray-text">
                       {item.label}
@@ -137,9 +137,9 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="mt-12 flex justify-between gap-6">
-        <div className="w-6/12">
-          <h2 className="text-xt font-bold">Latest Blocks</h2>
+      <div className="mt-12 flex flex-col lg:flex-row justify-between gap-6">
+        <div className="w-full lg:w-1/2">
+          <h2 className="text-xl font-bold">Latest Blocks</h2>
           <div className="bg-white px-6 py-5 mt-4 rounded-2xl shadow-md divide-y divide-gray-divider ">
             {blocks.map((item: any) => {
               return (
@@ -153,7 +153,7 @@ const Home = () => {
                     </div>
                     <div>
                       <Link href={`/block/${item.id}`} passHref>
-                        <a className="text-base font-bold text-primary truncate w-28 block">
+                        <a className="text-base font-bold text-primary truncate w-24 block">
                           {item.id}
                         </a>
                       </Link>
@@ -162,12 +162,19 @@ const Home = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="text-sm font-bold">{item.value}</div>
-                  <Link href={`/address/${item.hash}`} passHref>
-                    <a className="text-sm font-medium text-primary truncate w-28 block">
-                      {item.hash}
-                    </a>
-                  </Link>
+                  <div className="text-sm font-bold hidden lg:block">
+                    {item.value}
+                  </div>
+                  <div className="text-right">
+                    <div className="text-sm font-bold lg:hidden">
+                      {item.value}
+                    </div>
+                    <Link href={`/address/${item.hash}`} passHref>
+                      <a className="text-sm font-medium text-primary truncate w-28 sm:w-auto lg:w-28 block">
+                        {item.hash}
+                      </a>
+                    </Link>
+                  </div>
                 </div>
               );
             })}
@@ -179,8 +186,8 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="w-6/12">
-          <h2 className="text-xt font-bold">Latest Transactions</h2>
+        <div className="w-full lg:w-1/2 mt-5 lg:mt-0">
+          <h2 className="text-xl font-bold">Latest Transactions</h2>
           <div className="bg-white px-6 py-5 mt-4 rounded-2xl shadow-md divide-y divide-gray-divider ">
             {transactions.map((item: any) => {
               return (
