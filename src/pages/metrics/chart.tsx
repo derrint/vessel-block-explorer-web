@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 
@@ -5,7 +6,7 @@ import React, { useEffect } from 'react';
 // import dynamic from 'next/dynamic';
 
 import { DropdownMenu } from '@components/dropdown';
-// import { ChartDataDummy } from '@data/index';
+import { ChartDataDummy } from '@data/index';
 
 const Chart = ({ title }: any) => {
   // // related to build issue
@@ -24,65 +25,70 @@ const Chart = ({ title }: any) => {
   // let chart: any = null;
   // let areaSeries: any = null;
   useEffect(() => {
-    // const chart = createChart(ref.current, {
-    //   width: ref.current.clientWidth,
-    //   height: 300,
-    //   leftPriceScale: {
-    //     scaleMargins: {
-    //       top: 0.2,
-    //       bottom: 0.2,
-    //     },
-    //     visible: true,
-    //     borderVisible: false,
-    //   },
-    //   rightPriceScale: {
-    //     visible: false,
-    //   },
-    //   timeScale: {
-    //     borderVisible: false,
-    //     timeVisible: true,
-    //     secondsVisible: true,
-    //     // tickMarkFormatter: (time: any) => {
-    //     //   const date = new Date(time.year, time.month, time.day);
-    //     //   return moment(date).format('YYYY/MM/DD');
-    //     // },
-    //   },
-    //   grid: {
-    //     horzLines: {
-    //       color: '#ffffff',
-    //     },
-    //     vertLines: {
-    //       color: '#eee',
-    //     },
-    //   },
-    // });
-    // const areaSeries = chart.addAreaSeries({
-    //   lineColor: '#2603FF80',
-    //   topColor: 'rgba(168, 155, 250, 0.31)',
-    //   bottomColor: 'white',
-    // });
-    // switch (interval) {
-    //   case 'daily':
-    //     areaSeries.setData(ChartDataDummy.daily);
-    //     break;
-    //   case 'weekly':
-    //     areaSeries.setData(ChartDataDummy.weekly);
-    //     break;
-    //   case 'monthly':
-    //     areaSeries.setData(ChartDataDummy.monthly);
-    //     break;
-    //   default:
-    //     break;
-    // }
-    // chart.timeScale().fitContent();
-    // const handleResize = () => {
-    //   chart.applyOptions({ width: ref.current.clientWidth });
-    // };
-    // window.addEventListener('resize', handleResize);
-    // return () => {
-    //   window.removeEventListener('resize', handleResize);
-    //   chart.remove();
-    // };
+    const { createChart } = require('lightweight-charts');
+
+    const chart = createChart(ref.current, {
+      width: ref.current.clientWidth,
+      height: 300,
+      leftPriceScale: {
+        scaleMargins: {
+          top: 0.2,
+          bottom: 0.2,
+        },
+        visible: true,
+        borderVisible: false,
+      },
+      rightPriceScale: {
+        visible: false,
+      },
+      timeScale: {
+        borderVisible: false,
+        timeVisible: true,
+        secondsVisible: true,
+        // tickMarkFormatter: (time: any) => {
+        //   const date = new Date(time.year, time.month, time.day);
+        //   return moment(date).format('YYYY/MM/DD');
+        // },
+      },
+      grid: {
+        horzLines: {
+          color: '#ffffff',
+        },
+        vertLines: {
+          color: '#eee',
+        },
+      },
+    });
+    const areaSeries = chart.addAreaSeries({
+      lineColor: '#2603FF80',
+      topColor: 'rgba(168, 155, 250, 0.31)',
+      bottomColor: 'white',
+    });
+    switch (interval) {
+      case 'daily':
+        areaSeries.setData(ChartDataDummy.daily);
+
+        break;
+      case 'weekly':
+        areaSeries.setData(ChartDataDummy.weekly);
+
+        break;
+      case 'monthly':
+        areaSeries.setData(ChartDataDummy.monthly);
+
+        break;
+      default:
+        break;
+    }
+    chart.timeScale().fitContent();
+    const handleResize = () => {
+      chart.applyOptions({ width: ref.current.clientWidth });
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      chart.remove();
+    };
   }, [interval]);
 
   const handleChange = (v: string) => {
