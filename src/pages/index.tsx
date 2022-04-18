@@ -69,10 +69,10 @@ const Home = () => {
 
     // List blocks in table
     const latestBlocks = [] as any;
-    for (let i = 0; i < 20; i += 1) {
+    for (let i = 0; i < 5; i += 1) {
       provider.getBlock(latestBlockNumber - i).then((block) => {
         latestBlocks.push(block);
-        // console.log(block);
+        console.log(block);
         // provider.getTransaction(block.hash).then((tx) => {
         //   console.log(tx);
         // });
@@ -173,8 +173,8 @@ const Home = () => {
                         {item.hash}
                       </a>
                     </Link>
-                    <div className="text-xs font-medium text-gray-text lg:hidden">
-                      {item.difficulty}
+                    <div className="text-xs font-medium text-gray-text">
+                      {item.gasUsed.toNumber().toLocaleString()}
                     </div>
                   </div>
                 </div>
