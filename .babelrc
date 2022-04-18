@@ -23,6 +23,7 @@
           "@components": "./src/components",
           "@templates": "./src/templates",
           "@constant": "./src/constant",
+          "@context": "./src/context",
           "@data": "./src/data",
           "@overmind": "./src/overmind",
           "@images": "./public/assets/images",

@@ -1,73 +1,16 @@
+import React from 'react';
+
+import moment from 'moment';
 import Link from 'next/link';
 import { AiOutlineSync } from 'react-icons/ai';
-import { BiChevronRight, BiCube } from 'react-icons/bi';
+import { BiChevronRight } from 'react-icons/bi';
 import { FiLayers } from 'react-icons/fi';
 
 import { Section } from '@components/layout';
 import { Search } from '@components/search';
+import { SDKContext } from '@context/SDK';
 
 const Home = () => {
-  const metrics = [
-    {
-      id: 'blocks',
-      label: 'Total Blocks',
-      value: '25,410,510',
-    },
-    {
-      id: 'txs',
-      label: 'Total Transactions',
-      value: '95,001,163',
-    },
-    {
-      id: 'wallets',
-      label: 'Wallets Created',
-      value: '3,989,475',
-    },
-  ];
-
-  const blocks = [
-    {
-      id: 14337225,
-      timestamp: '4 secs ago',
-      value: '40 txns',
-      icon: <FiLayers size={20} />,
-      hash: '0xa15c13e183bfcefgj898as7sas24',
-      amount: '2.890 VES',
-    },
-    {
-      id: 14337225,
-      timestamp: '4 secs ago',
-      value: '40 txns',
-      icon: <FiLayers size={20} />,
-      hash: '0xa15c13e183bfcefgj898as7sas24',
-      amount: '2.890 VES',
-    },
-    {
-      id: 14337225,
-      timestamp: '4 secs ago',
-      value: '40 txns',
-      icon: <FiLayers size={20} />,
-      hash: '0xa15c13e183bfcefgj898as7sas24',
-      amount: '2.890 VES',
-    },
-    {
-      id: 14337225,
-      timestamp: '4 secs ago',
-      value: '40 txns',
-      icon: <BiCube size={20} />,
-      hash: '0xa15c13e183bfcefgj898as7sas24',
-      amount: '2.890 VES',
-    },
-    {
-      id: 14337225,
-      timestamp: '4 secs ago',
-      value: '40 txns',
-      icon: <BiCube size={20} />,
-      hash: '0xa15c13e183bfcefgj898as7sas24',
-      amount: '2.890 VES',
-    },
-  ];
-
   const transactions = [
     {
       id: '0xa15c13e183bfcefgj898as7sas24',
@@ -111,6 +54,57 @@ const Home = () => {
     },
   ];
 
+  const { provider } = React.useContext(SDKContext);
+
+  // provider.listAccounts().then((result) => {
+  //   console.log(`accounts : ${result}`);
+  // });
+
+  const [blockTotal, setBlockTotal] = React.useState(0);
+  const [blockItems, setBlockItems] = React.useState([] as any);
+
+  const getAllBlock = async () => {
+    const latestBlockNumber = await provider.getBlockNumber();
+    setBlockTotal(latestBlockNumber);
+
+    // List blocks in table
+    const latestBlocks = [] as any;
+    for (let i = 0; i < 20; i += 1) {
+      provider.getBlock(latestBlockNumber - i).then((block) => {
+        latestBlocks.push(block);
+        // console.log(block);
+        // provider.getTransaction(block.hash).then((tx) => {
+        //   console.log(tx);
+        // });
+        setBlockItems((oldArray: any) => [...oldArray, block]);
+      });
+    }
+  };
+
+  React.useEffect(() => {
+    getAllBlock();
+
+    return () => {};
+  }, []);
+
+  const metrics = [
+    {
+      id: 'blocks',
+      label: 'Total Blocks',
+      value: blockTotal.toLocaleString(),
+    },
+    {
+      id: 'txs',
+      label: 'Total Transactions',
+      value: '95,001,163',
+    },
+    {
+      id: 'wallets',
+      label: 'Wallets Created',
+      value: '3,989,475',
+    },
+  ];
+
   return (
     <Section>
       <h1 className="text-3xl font-bold text-center mb-6">
@@ -146,33 +140,33 @@ const Home = () => {
         <div className="w-full lg:w-1/2">
           <h2 className="text-xl font-bold">Latest Blocks</h2>
           <div className="bg-white px-6 py-5 mt-4 rounded-2xl shadow-md divide-y divide-gray-divider ">
-            {blocks.map((item: any) => {
+            {blockItems.map((item: any, idx: number) => {
               return (
                 <div
-                  key={item.id}
+                  key={idx}
                   className="flex items-start justify-between mt-3 pt-3 first:mt-0 first:pt-0"
                 >
                   <div className="flex items-center gap-4">
                     <div className="flex bg-gray-background rounded-lg p-2">
-                      {item.icon}
+                      <FiLayers size={20} />
                     </div>
                     <div>
-                      <Link href={`/block/${item.id}`} passHref>
+                      <Link href={`/block/${item.number}`} passHref>
                         <a className="text-sm sm:text-base font-bold text-primary truncate w-24 block">
-                          {item.id}
+                          {item.number}
                         </a>
                       </Link>
                       <div className="text-xs font-medium text-gray-text">
-                        {item.timestamp}
+                        {moment.unix(item.timestamp).fromNow()}
                       </div>
                     </div>
                   </div>
                   <div className="text-sm font-bold hidden lg:block">
-                    {item.value}
+                    {item.transactions.length} txns
                   </div>
                   <div className="text-right">
-                    <div className="text-sm font-bold lg:hidden">
-                      {item.value}
+                    <div className="text-sm font-bold lg:hidden truncate w-28">
+                      {item.transactions.length} txns
                     </div>
                     <Link href={`/address/${item.hash}`} passHref>
                       <a className="text-sm font-medium text-primary truncate w-28 sm:w-auto lg:w-28 hidden lg:block">
@@ -180,7 +174,7 @@ const Home = () => {
                       </a>
                     </Link>
                     <div className="text-xs font-medium text-gray-text lg:hidden">
-                      {item.amount}
+                      {item.difficulty}
                     </div>
                   </div>
                 </div>
@@ -197,10 +191,10 @@ const Home = () => {
         <div className="w-full lg:w-1/2 mt-5 lg:mt-0">
           <h2 className="text-xl font-bold">Latest Transactions</h2>
           <div className="bg-white px-6 py-5 mt-4 rounded-2xl shadow-md divide-y divide-gray-divider ">
-            {transactions.map((item: any) => {
+            {transactions.map((item: any, idx: number) => {
               return (
                 <div
-                  key={item.id}
+                  key={idx}
                   className="flex flex-col sm:flex-row items-start justify-between mt-3 pt-3 first:mt-0 first:pt-0 gap-2 sm:gap-0"
                 >
                   <div className="flex items-center gap-4 w-full sm:w-5/12">

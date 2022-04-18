@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
 
-import { baseURL } from '@constant/config';
+import { baseUrl } from '@constant/config';
 
 const http = axios.create({
-  baseURL,
+  baseURL: baseUrl,
 });
 
 http.interceptors.request.use(
