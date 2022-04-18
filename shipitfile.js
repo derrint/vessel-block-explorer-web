@@ -31,17 +31,17 @@ module.exports = (shipit) => {
   });
 
   shipit.blTask('npm:install', async () => {
-    const command = 'nvm use v16.14.0 && npm install --legacy-peer-deps';
+    const command = 'nvm use v16.14.0 && yarn install';
     await shipit.remote(`cd ${shipit.releasePath} && ${command}`);
   });
 
   shipit.blTask('build:app', async () => {
-    const command = 'nvm use v16.14.0 && npm run build';
+    const command = 'nvm use v16.14.0 && yarn run build';
     await shipit.remote(`cd ${shipit.releasePath} && ${command}`);
   });
 
   shipit.blTask('pm2:start', async () => {
-    const command = `nvm use v16.14.0 && pm2 start npm --name "${appName}" -- start`;
+    const command = `nvm use v16.14.0 && pm2 start yarn --name "${appName}" -- start`;
     await shipit.remote(
       `nvm use v16.14.0 && pm2 stop ${appName} && pm2 delete ${appName}`
     );
