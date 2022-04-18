@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
 
 import { Tab } from '@headlessui/react';
@@ -12,16 +13,7 @@ const Metrics = () => {
   const router = useRouter();
 
   const [selectedMetric, setSelectedMetric] = React.useState('' as any);
-
-  React.useEffect(() => {
-    console.log(router.query.id);
-    if (router.query.id) {
-      const mt = router?.query?.id[0];
-      setSelectedMetric(mt);
-    }
-
-    return () => {};
-  }, [router.query]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const metrics = [
     {
@@ -54,7 +46,18 @@ const Metrics = () => {
     },
   ];
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  React.useEffect(() => {
+    if (router.query.id) {
+      // console.log(router.query.id);
+      const mt = router?.query?.id[0];
+      setSelectedMetric(mt);
+
+      const index = metrics.findIndex((x) => x.id === mt);
+      setSelectedIndex(index);
+    }
+
+    return () => {};
+  }, [router.query]);
 
   return (
     <Section>
