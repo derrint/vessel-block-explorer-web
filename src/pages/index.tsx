@@ -1,10 +1,14 @@
+/* eslint-disable no-await-in-loop */
 import React from 'react';
 
+import _ from 'lodash';
 import moment from 'moment';
 import Link from 'next/link';
 import { AiOutlineSync } from 'react-icons/ai';
 import { BiChevronRight } from 'react-icons/bi';
 import { FiLayers } from 'react-icons/fi';
+import { Scrollbar } from 'smooth-scrollbar-react';
+import type { Scrollbar as BaseScrollbar } from 'smooth-scrollbar/scrollbar';
 
 import { Section } from '@components/layout';
 import { Search } from '@components/search';
@@ -62,29 +66,48 @@ const Home = () => {
 
   const [blockTotal, setBlockTotal] = React.useState(0);
   const [blockItems, setBlockItems] = React.useState([] as any);
+  const latestBlockItems: any = [];
 
-  const getAllBlock = async () => {
+  const updateBlockTotal = async () => {
     const latestBlockNumber = await provider.getBlockNumber();
     setBlockTotal(latestBlockNumber);
+    return latestBlockNumber;
+  };
 
-    // List blocks in table
-    const latestBlocks = [] as any;
+  const updateBlockItems = async (latestBlockNumber: number) => {
     for (let i = 0; i < 5; i += 1) {
-      provider.getBlock(latestBlockNumber - i).then((block) => {
-        latestBlocks.push(block);
-        console.log(block);
-        // provider.getTransaction(block.hash).then((tx) => {
-        //   console.log(tx);
-        // });
-        setBlockItems((oldArray: any) => [...oldArray, block]);
-      });
+      const block = await provider.getBlock(latestBlockNumber - i);
+      if (!latestBlockItems.find((x: any) => x.number === block.number)) {
+        latestBlockItems.unshift(block);
+      }
     }
+
+    const lbi =
+      blockItems.length === 0
+        ? _.orderBy(latestBlockItems, ['number'], ['desc'])
+        : latestBlockItems;
+    setBlockItems(lbi);
+  };
+
+  const refreshData = async () => {
+    const lbn = await updateBlockTotal();
+    await updateBlockItems(lbn);
   };
 
   React.useEffect(() => {
-    getAllBlock();
+    refreshData();
 
     return () => {};
+  }, []);
+
+  React.useEffect(() => {
+    const intervalId = setInterval(async () => {
+      refreshData();
+    }, 5000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   const metrics = [
@@ -104,6 +127,8 @@ const Home = () => {
       value: '3,989,475',
     },
   ];
+
+  const scrollbar = React.useRef<BaseScrollbar | null>(null);
 
   return (
     <Section>
@@ -139,47 +164,61 @@ const Home = () => {
       <div className="mt-12 flex flex-col lg:flex-row justify-between gap-6">
         <div className="w-full lg:w-1/2">
           <h2 className="text-xl font-bold">Latest Blocks</h2>
-          <div className="bg-white px-6 py-5 mt-4 rounded-2xl shadow-md divide-y divide-gray-divider ">
-            {blockItems.map((item: any, idx: number) => {
-              return (
-                <div
-                  key={idx}
-                  className="flex items-start justify-between mt-3 pt-3 first:mt-0 first:pt-0"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="flex bg-gray-background rounded-lg p-2">
-                      <FiLayers size={20} />
-                    </div>
-                    <div>
-                      <Link href={`/block/${item.number}`} passHref>
-                        <a className="text-sm sm:text-base font-bold text-primary truncate w-24 block">
-                          {item.number}
-                        </a>
-                      </Link>
-                      <div className="text-xs font-medium text-gray-text">
-                        {moment.unix(item.timestamp).fromNow()}
+          <div className="bg-white px-6 py-5 mt-4 rounded-2xl shadow-md divide-y divide-gray-divider">
+            <div
+              className="max-h-[300px] flex"
+              // style={{ maxHeight: 300, display: 'flex' }}
+            >
+              <Scrollbar
+                ref={scrollbar}
+                plugins={{
+                  overscroll: {
+                    effect: 'bounce',
+                  } as const,
+                }}
+              >
+                {blockItems.map((item: any, idx: number) => {
+                  return (
+                    <div
+                      key={idx}
+                      className="flex items-start justify-between mt-3 pt-3 first:mt-0 first:pt-0"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="flex bg-gray-background rounded-lg p-2">
+                          <FiLayers size={20} />
+                        </div>
+                        <div>
+                          <Link href={`/block/${item.number}`} passHref>
+                            <a className="text-sm sm:text-base font-bold text-primary truncate w-24 block">
+                              {item.number}
+                            </a>
+                          </Link>
+                          <div className="text-xs font-medium text-gray-text">
+                            {moment.unix(item.timestamp).fromNow()}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-sm font-bold hidden lg:block">
+                        {item.transactions.length} txns
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-bold lg:hidden truncate w-28">
+                          {item.transactions.length} txns
+                        </div>
+                        <Link href={`/address/${item.hash}`} passHref>
+                          <a className="text-sm font-medium text-primary truncate w-28 sm:w-auto lg:w-28 hidden lg:block">
+                            {item.hash}
+                          </a>
+                        </Link>
+                        <div className="text-xs font-medium text-gray-text">
+                          {item.gasUsed.toNumber().toLocaleString()} VSL
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="text-sm font-bold hidden lg:block">
-                    {item.transactions.length} txns
-                  </div>
-                  <div className="text-right">
-                    <div className="text-sm font-bold lg:hidden truncate w-28">
-                      {item.transactions.length} txns
-                    </div>
-                    <Link href={`/address/${item.hash}`} passHref>
-                      <a className="text-sm font-medium text-primary truncate w-28 sm:w-auto lg:w-28 hidden lg:block">
-                        {item.hash}
-                      </a>
-                    </Link>
-                    <div className="text-xs font-medium text-gray-text">
-                      {item.gasUsed.toNumber().toLocaleString()}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+                  );
+                })}
+              </Scrollbar>
+            </div>
             <div className="mt-3 pt-5">
               <button className="w-full py-2 font-bold text-sm text-primary text-center rounded-full bg-gradient-to-r from-gradient-gray-start to-gradient-gray-end">
                 View all blocks
