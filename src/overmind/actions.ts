@@ -1,3 +1,12 @@
+import { ethers } from 'ethers';
+
+import { rpcUrl, chainId, networkName } from '@constant/config';
+
+const provider = new ethers.providers.JsonRpcProvider(rpcUrl, {
+  name: networkName,
+  chainId,
+});
+
 // -----
 // ----- GLOBAL section -----
 // -----
@@ -20,4 +29,15 @@ export const hideModal = async (context: any) => {
     type: null,
     isVisible: false,
   };
+};
+
+export const updateBlockTotal = async (context: any) => {
+  const latestBlockNumber = await provider.getBlockNumber();
+
+  context.state.block = {
+    ...context.state.block,
+    total: latestBlockNumber,
+  };
+
+  return latestBlockNumber;
 };

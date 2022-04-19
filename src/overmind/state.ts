@@ -1,7 +1,17 @@
 type State = {
   isLoading: boolean;
-  auth: any;
-  modal: any;
+  auth: {
+    jwtToken: any;
+    isLoggedIn: any;
+  };
+  modal: {
+    name: string;
+    isVisible: boolean;
+  };
+  block: {
+    total: number;
+    items: any;
+  };
 };
 
 export const state: State = {
@@ -12,7 +22,11 @@ export const state: State = {
     isLoggedIn: undefined,
   },
   modal: {
-    name: null,
+    name: '',
     isVisible: false,
+  },
+  block: {
+    total: 0,
+    items: [],
   },
 };

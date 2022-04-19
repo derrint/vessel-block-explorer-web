@@ -13,8 +13,12 @@ import type { Scrollbar as BaseScrollbar } from 'smooth-scrollbar/scrollbar';
 import { Section } from '@components/layout';
 import { Search } from '@components/search';
 import { SDKContext } from '@context/SDK';
+import { useActions, useState } from '@overmind/index';
 
 const Home = () => {
+  const { updateBlockTotal } = useActions();
+  const { block } = useState();
+
   const transactions = [
     {
       id: '0xa15c13e183bfcefgj898as7sas24',
@@ -64,21 +68,16 @@ const Home = () => {
   //   console.log(`accounts : ${result}`);
   // });
 
-  const [blockTotal, setBlockTotal] = React.useState(0);
   const [blockItems, setBlockItems] = React.useState([] as any);
   const latestBlockItems: any = [];
 
-  const updateBlockTotal = async () => {
-    const latestBlockNumber = await provider.getBlockNumber();
-    setBlockTotal(latestBlockNumber);
-    return latestBlockNumber;
-  };
-
   const updateBlockItems = async (latestBlockNumber: number) => {
     for (let i = 0; i < 5; i += 1) {
-      const block = await provider.getBlock(latestBlockNumber - i);
-      if (!latestBlockItems.find((x: any) => x.number === block.number)) {
-        latestBlockItems.unshift(block);
+      const currentBlock = await provider.getBlock(latestBlockNumber - i);
+      if (
+        !latestBlockItems.find((x: any) => x.number === currentBlock.number)
+      ) {
+        latestBlockItems.unshift(currentBlock);
       }
     }
 
@@ -96,6 +95,9 @@ const Home = () => {
 
   React.useEffect(() => {
     refreshData();
+    // provider.getTransaction(
+    //   '0xa761a19cbeac467352359ae6b520e0974b70401118b0f760332b0bee567bd331'
+    // );
 
     return () => {};
   }, []);
@@ -114,7 +116,7 @@ const Home = () => {
     {
       id: 'blocks',
       label: 'Total Blocks',
-      value: blockTotal.toLocaleString(),
+      value: block.total.toLocaleString(),
     },
     {
       id: 'txs',
