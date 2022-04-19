@@ -12,6 +12,10 @@ type State = {
     total: number;
     items: any;
   };
+  transactions: {
+    total: number;
+    items: any;
+  };
 };
 
 export const state: State = {
@@ -26,6 +30,10 @@ export const state: State = {
     isVisible: false,
   },
   block: {
+    total: 0,
+    items: [],
+  },
+  transactions: {
     total: 0,
     items: [],
   },

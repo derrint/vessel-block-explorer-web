@@ -15,50 +15,7 @@ import { useActions, useState } from '@overmind/index';
 
 const Home = () => {
   const { updateBlockTotal, updateBlockItems } = useActions();
-  const { block } = useState();
-
-  const transactions = [
-    {
-      id: '0xa15c13e183bfcefgj898as7sas24',
-      timestamp: '4 secs ago',
-      from: '0xa15c13e183bfcefgj898as7sas24',
-      to: '0xa15c13e183bfcefgj898as7sas24',
-      value: '0.4283 VSL',
-      icon: <AiOutlineSync size={20} />,
-    },
-    {
-      id: '0xa15c13e183bfcefgj898as7sas24',
-      timestamp: '4 secs ago',
-      from: '0xa15c13e183bfcefgj898as7sas24',
-      to: '0xa15c13e183bfcefgj898as7sas24',
-      value: '0.4283 VSL',
-      icon: <AiOutlineSync size={20} />,
-    },
-    {
-      id: '0xa15c13e183bfcefgj898as7sas24',
-      timestamp: '4 secs ago',
-      from: '0xa15c13e183bfcefgj898as7sas24',
-      to: '0xa15c13e183bfcefgj898as7sas24',
-      value: '0.4283 VSL',
-      icon: <AiOutlineSync size={20} />,
-    },
-    {
-      id: '0xa15c13e183bfcefgj898as7sas24',
-      timestamp: '4 secs ago',
-      from: '0xa15c13e183bfcefgj898as7sas24',
-      to: '0xa15c13e183bfcefgj898as7sas24',
-      value: '0.4283 VSL',
-      icon: <AiOutlineSync size={20} />,
-    },
-    {
-      id: '0xa15c13e183bfcefgj898as7sas24',
-      timestamp: '4 secs ago',
-      from: '0xa15c13e183bfcefgj898as7sas24',
-      to: '0xa15c13e183bfcefgj898as7sas24',
-      value: '0.4283 VSL',
-      icon: <AiOutlineSync size={20} />,
-    },
-  ];
+  const { block, transactions } = useState();
 
   const refreshData = async () => {
     await updateBlockTotal();
@@ -67,9 +24,6 @@ const Home = () => {
 
   React.useEffect(() => {
     refreshData();
-    // provider.getTransaction(
-    //   '0xa761a19cbeac467352359ae6b520e0974b70401118b0f760332b0bee567bd331'
-    // );
 
     return () => {};
   }, []);
@@ -93,7 +47,7 @@ const Home = () => {
     {
       id: 'txs',
       label: 'Total Transactions',
-      value: '95,001,163',
+      value: transactions.total.toLocaleString(),
     },
     {
       id: 'wallets',
@@ -203,7 +157,7 @@ const Home = () => {
         <div className="w-full lg:w-1/2 mt-5 lg:mt-0">
           <h2 className="text-xl font-bold">Latest Transactions</h2>
           <div className="bg-white px-6 py-5 mt-4 rounded-2xl shadow-md divide-y divide-gray-divider ">
-            {transactions.map((item: any, idx: number) => {
+            {transactions.items.map((item: any, idx: number) => {
               return (
                 <div
                   key={idx}
@@ -211,16 +165,16 @@ const Home = () => {
                 >
                   <div className="flex items-center gap-4 w-full sm:w-5/12">
                     <div className="bg-gray-background rounded-lg p-2 hidden sm:flex">
-                      {item.icon}
+                      <AiOutlineSync size={20} />
                     </div>
                     <div>
-                      <Link href={`/tx/${item.id}`} passHref>
+                      <Link href={`/tx/${item.hash}`} passHref>
                         <a className="text-sm sm:text-base font-bold text-primary truncate w-64 sm:w-28 block">
-                          {item.id}
+                          {item.hash}
                         </a>
                       </Link>
                       <div className="text-xs font-medium text-gray-text hidden sm:block">
-                        {item.timestamp}
+                        {moment.unix(item.timestamp).fromNow()}
                       </div>
                     </div>
                   </div>
@@ -239,7 +193,7 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="text-right text-xs font-medium w-full sm:w-2/12 hidden sm:block">
-                    {item.value}
+                    {item.gasPrice.toNumber().toLocaleString()} VSL
                   </div>
                   <div className="flex sm:hidden bg-[#F0F3FA] rounded-xl px-3 py-1 w-full justify-between">
                     <div className="text-xs font-extrabold text-[#2D4786] flex items-center gap-2">

@@ -45,20 +45,40 @@ export const updateBlockTotal = async (context: any) => {
 };
 
 export const updateBlockItems = async (context: any) => {
-  const { total, items } = context.state.block;
-  const latestBlockItems = [...items];
+  const { block, transactions } = context.state;
+  const blockItems = [...block.items];
+  const txItems = [...transactions.items];
 
   for (let i = 0; i < 5; i += 1) {
-    const currentBlock = await provider.getBlock(total - i);
-    if (!latestBlockItems.find((x: any) => x.number === currentBlock.number)) {
-      latestBlockItems.unshift(currentBlock);
+    const currentBlock = await provider.getBlockWithTransactions(
+      block.total - i
+    );
+    if (!blockItems.find((x: any) => x.number === currentBlock.number)) {
+      blockItems.unshift(currentBlock);
+
+      if (currentBlock.transactions.length > 0) {
+        const txMapped = currentBlock.transactions.map((tx) => {
+          return {
+            ...tx,
+            timestamp: currentBlock.timestamp,
+          };
+        });
+        txItems.unshift(txMapped);
+        console.log(currentBlock.number, txMapped);
+      }
     }
   }
 
-  const lbiSorted = _.orderBy(latestBlockItems, ['number'], ['desc']);
+  const bciSorted = _.orderBy(blockItems, ['number'], ['desc']);
 
   context.state.block = {
     ...context.state.block,
-    items: lbiSorted,
+    items: bciSorted,
+  };
+
+  context.state.transactions = {
+    ...context.state.transactions,
+    total: txItems.length,
+    items: txItems,
   };
 };
