@@ -220,9 +220,11 @@ const Home = () => {
               </Scrollbar>
             </div>
             <div className="mt-3 pt-5">
-              <button className="w-full py-2 font-bold text-sm text-primary text-center rounded-full bg-gradient-to-r from-gradient-gray-start to-gradient-gray-end">
-                View all blocks
-              </button>
+              <Link href="/blocks" passHref>
+                <button className="w-full py-2 font-bold text-sm text-primary text-center rounded-full bg-gradient-to-r from-gradient-gray-start to-gradient-gray-end">
+                  View all blocks
+                </button>
+              </Link>
             </div>
           </div>
         </div>
