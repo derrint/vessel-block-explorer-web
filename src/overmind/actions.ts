@@ -1,4 +1,6 @@
+/* eslint-disable no-await-in-loop */
 import { ethers } from 'ethers';
+import _ from 'lodash';
 
 import { rpcUrl, chainId, networkName } from '@constant/config';
 
@@ -40,4 +42,23 @@ export const updateBlockTotal = async (context: any) => {
   };
 
   return latestBlockNumber;
+};
+
+export const updateBlockItems = async (context: any) => {
+  const { total, items } = context.state.block;
+  const latestBlockItems = [...items];
+
+  for (let i = 0; i < 5; i += 1) {
+    const currentBlock = await provider.getBlock(total - i);
+    if (!latestBlockItems.find((x: any) => x.number === currentBlock.number)) {
+      latestBlockItems.unshift(currentBlock);
+    }
+  }
+
+  const lbiSorted = _.orderBy(latestBlockItems, ['number'], ['desc']);
+
+  context.state.block = {
+    ...context.state.block,
+    items: lbiSorted,
+  };
 };

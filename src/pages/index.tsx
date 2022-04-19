@@ -1,7 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import React from 'react';
 
-import _ from 'lodash';
 import moment from 'moment';
 import Link from 'next/link';
 import { AiOutlineSync } from 'react-icons/ai';
@@ -12,11 +11,10 @@ import type { Scrollbar as BaseScrollbar } from 'smooth-scrollbar/scrollbar';
 
 import { Section } from '@components/layout';
 import { Search } from '@components/search';
-import { SDKContext } from '@context/SDK';
 import { useActions, useState } from '@overmind/index';
 
 const Home = () => {
-  const { updateBlockTotal } = useActions();
+  const { updateBlockTotal, updateBlockItems } = useActions();
   const { block } = useState();
 
   const transactions = [
@@ -62,35 +60,9 @@ const Home = () => {
     },
   ];
 
-  const { provider } = React.useContext(SDKContext);
-
-  // provider.listAccounts().then((result) => {
-  //   console.log(`accounts : ${result}`);
-  // });
-
-  const [blockItems, setBlockItems] = React.useState([] as any);
-  const latestBlockItems: any = [];
-
-  const updateBlockItems = async (latestBlockNumber: number) => {
-    for (let i = 0; i < 5; i += 1) {
-      const currentBlock = await provider.getBlock(latestBlockNumber - i);
-      if (
-        !latestBlockItems.find((x: any) => x.number === currentBlock.number)
-      ) {
-        latestBlockItems.unshift(currentBlock);
-      }
-    }
-
-    const lbi =
-      blockItems.length === 0
-        ? _.orderBy(latestBlockItems, ['number'], ['desc'])
-        : latestBlockItems;
-    setBlockItems(lbi);
-  };
-
   const refreshData = async () => {
-    const lbn = await updateBlockTotal();
-    await updateBlockItems(lbn);
+    await updateBlockTotal();
+    await updateBlockItems();
   };
 
   React.useEffect(() => {
@@ -167,10 +139,7 @@ const Home = () => {
         <div className="w-full lg:w-1/2">
           <h2 className="text-xl font-bold">Latest Blocks</h2>
           <div className="bg-white px-6 py-5 mt-4 rounded-2xl shadow-md divide-y divide-gray-divider">
-            <div
-              className="max-h-[300px] flex"
-              // style={{ maxHeight: 300, display: 'flex' }}
-            >
+            <div className="max-h-[300px] flex">
               <Scrollbar
                 ref={scrollbar}
                 plugins={{
@@ -179,7 +148,7 @@ const Home = () => {
                   } as const,
                 }}
               >
-                {blockItems.map((item: any, idx: number) => {
+                {block.items.map((item: any, idx: number) => {
                   return (
                     <div
                       key={idx}
