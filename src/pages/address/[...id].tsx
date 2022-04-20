@@ -59,7 +59,7 @@ const BlocksDetails = () => {
   return (
     <Section>
       <div className="flex flex-row sm:flex-col lg:flex-row justify-between items-center sm:items-start lg:items-center mb-10">
-        <h1 className="text-xl sm:text-3xl font-bold mb-0 sm:mb-5 lg:mb-0">
+        <h1 className="text-xl sm:text-3xl font-bold mb-0 sm:mb-5 lg:mb-0 whitespace-nowrap">
           Wallet details
         </h1>
 
@@ -131,7 +131,9 @@ const BlocksDetails = () => {
             <div className="col-span-3 mb-3 font-medium">
               22 February 2021, 16:03:08
             </div>
-            <div className="text-gray-text font-bold lg:mb-3">Assets</div>
+            <div className="text-gray-text font-bold lg:mb-3 flex items-center">
+              Assets
+            </div>
             <div className="col-span-3 lg:mb-3 flex items-center gap-3 font-bold">
               $5.87
               <Popover className="relative">
